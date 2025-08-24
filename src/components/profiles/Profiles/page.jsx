@@ -79,21 +79,27 @@ const getInitials = (name = "") =>
 export default function Profiles() {
   return (
     <div className="space-y-6">
-      {/* Header Actions */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-        <div className="relative">
-          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tapwise-gray h-4 w-4" />
-          <input
-            type="text"
-            placeholder="Search profiles..."
-            className="h-9 w-64 pl-10 rounded-md border border-border bg-white text-sm placeholder:text-tapwise-gray focus:outline-none"
-          />
+      {/* Header Actions: mobile -> row (button right), sm+ -> 3-col grid (search centered) */}
+      <div className="flex items-center justify-between gap-2 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
+        {/* Search */}
+        <div className="flex sm:col-start-2 sm:justify-center">
+          <div className="relative">
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tapwise-gray h-4 w-4" />
+            <input
+              type="text"
+              placeholder="Search profiles..."
+              className="h-9 w-40 sm:w-64 pl-10 rounded-md border border-border bg-white text-sm placeholder:text-tapwise-gray focus:outline-none"
+            />
+          </div>
         </div>
 
-        <button className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-tapwise-yellow text-tapwise-black hover:bg-tapwise-yellow-hover transition-colors">
-          <FiPlus className="h-4 w-4 mr-2" />
-          Add Profile
-        </button>
+        {/* Add Profile */}
+        <div className="sm:col-start-3 sm:justify-self-end">
+          <button className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-tapwise-yellow text-tapwise-black hover:bg-tapwise-yellow-hover transition-colors">
+            <FiPlus className="h-4 w-4 mr-2" />
+            Add Profile
+          </button>
+        </div>
       </div>
 
       {/* Profiles Grid */}

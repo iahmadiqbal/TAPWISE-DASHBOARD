@@ -143,23 +143,37 @@ const LeadsOverview = () => (
 );
 
 /* ---------- Quick Actions ---------- */
+
+/* ---------- Quick Actions (updated loveable) ---------- */
 const QuickActions = () => (
   <div className="border border-border rounded-lg bg-white shadow-soft hover:shadow-medium transition-shadow">
     <div className="p-6 pb-3">
       <h3 className="text-tapwise-black font-semibold">Quick Actions</h3>
     </div>
-    <div className="p-6 pt-0 space-y-3">
-      <button className="w-full inline-flex items-center justify-center h-9 px-4 rounded-md bg-tapwise-yellow text-tapwise-black hover:bg-tapwise-yellow-hover transition-colors">
+
+    <div className="p-6 pt-0 grid gap-3">
+      {/* 1 - Add New Lead */}
+      <button className="w-full inline-flex items-center justify-center h-10 px-5 rounded-xl bg-tapwise-yellow text-tapwise-black font-medium shadow-sm hover:bg-tapwise-yellow-hover hover:shadow transition-all">
         <FiUserPlus className="h-4 w-4 mr-2" />
         Add New Lead
       </button>
-      <button className="w-full inline-flex items-center justify-center h-9 px-4 rounded-md border border-border">
-        <FiBarChart2 className="h-4 w-4 mr-2" />
-        View Reports
+
+      {/* 2 - Customize Card */}
+      <button className="w-full inline-flex items-center justify-center h-10 px-5 rounded-xl border border-border text-tapwise-black hover:bg-tapwise-gray-light/60 transition-colors">
+        <FiCreditCard className="h-4 w-4 mr-2" />
+        Customize Card
       </button>
-      <button className="w-full inline-flex items-center justify-center h-9 px-4 rounded-md border border-border">
+
+      {/* 3 - View Analytics */}
+      <button className="w-full inline-flex items-center justify-center h-10 px-5 rounded-xl border border-border text-tapwise-black hover:bg-tapwise-gray-light/60 transition-colors">
+        <FiBarChart2 className="h-4 w-4 mr-2" />
+        View Analytics
+      </button>
+
+      {/* 4 - Export Data */}
+      <button className="w-full inline-flex items-center justify-center h-10 px-5 rounded-xl border border-border text-tapwise-black hover:bg-tapwise-gray-light/60 transition-colors">
         <FiShare2 className="h-4 w-4 mr-2" />
-        Share Your Card
+        Export Data
       </button>
     </div>
   </div>

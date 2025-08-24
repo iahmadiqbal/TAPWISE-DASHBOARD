@@ -98,25 +98,25 @@ const Leads = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header Actions */}
+    <div className="space-y-6 overflow-x-hidden">
+      {/* Header Actions (same design; just responsive widths) */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-        <div className="flex items-center space-x-4">
-          <div className="relative">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <div className="relative w-full sm:w-64">
             <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tapwise-gray h-4 w-4" />
             <input
               type="text"
               placeholder="Search leads..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="h-9 w-64 pl-10 rounded-md border border-border bg-white text-sm placeholder:text-tapwise-gray focus:outline-none"
+              className="h-9 w-full pl-10 rounded-md border border-border bg-white text-sm placeholder:text-tapwise-gray focus:outline-none"
             />
           </div>
 
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-border rounded-lg text-sm"
+            className="w-full sm:w-auto px-3 py-2 border border-border rounded-lg text-sm"
           >
             <option value="all">All Status</option>
             <option value="new">New</option>
@@ -149,35 +149,108 @@ const Leads = () => {
       {/* Leads Display */}
       {viewMode === "list" ? (
         <div className="border border-border rounded-lg bg-white shadow-soft">
-          {/* CardHeader mimic */}
+          {/* Header */}
           <div className="p-6 pb-3">
             <h2 className="text-base font-semibold text-tapwise-black">
               Leads ({filteredLeads.length})
             </h2>
           </div>
 
-          {/* CardContent mimic */}
+          {/* Content */}
           <div className="p-6 pt-0">
-            <div className="overflow-x-auto">
-              <table className="w-full">
+            {/* Mobile: Card list (no table, no scroll) */}
+            <div className="space-y-3 sm:hidden">
+              {filteredLeads.map((lead) => (
+                <div
+                  key={lead.id}
+                  className="border border-border rounded-lg p-4 hover:bg-tapwise-gray-light"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="font-medium text-tapwise-black break-words">
+                        {lead.name}
+                      </p>
+                      <p className="text-sm text-tapwise-gray break-words">
+                        {lead.email}
+                      </p>
+                      <p className="text-sm text-tapwise-gray break-words">
+                        {lead.businessName}
+                      </p>
+                      <p className="text-sm text-tapwise-gray break-words">
+                        {lead.phoneNumber}
+                      </p>
+                      <p className="text-xs text-tapwise-gray mt-1">
+                        Added: {lead.dateAdded}
+                      </p>
+                    </div>
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
+                        lead.status
+                      )}`}
+                    >
+                      {lead.status}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 mt-3">
+                    <button
+                      className="h-8 w-8 rounded-md inline-flex items-center justify-center hover:bg-gray-100"
+                      title="Edit"
+                    >
+                      <FiEdit className="h-4 w-4" />
+                    </button>
+                    <button
+                      className="h-8 w-8 rounded-md inline-flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
+                      onClick={() => handleStatusChange(lead.id, "converted")}
+                      disabled={lead.status === "converted"}
+                      title="Mark Converted"
+                    >
+                      <FiUserCheck className="h-4 w-4" />
+                    </button>
+                    <button
+                      className="h-8 w-8 rounded-md inline-flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
+                      onClick={() => handleStatusChange(lead.id, "interested")}
+                      disabled={
+                        lead.status === "interested" ||
+                        lead.status === "converted"
+                      }
+                      title="Mark Interested"
+                    >
+                      <FiHeart className="h-4 w-4" />
+                    </button>
+                    <button
+                      className="h-8 w-8 rounded-md inline-flex items-center justify-center hover:bg-gray-100"
+                      onClick={() => handleDelete(lead.id)}
+                      title="Delete"
+                    >
+                      <FiTrash2 className="h-4 w-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* sm+ : Table (no overflow-x; wraps inside) */}
+            <div className="hidden sm:block">
+              <table className="w-full table-fixed">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
+                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray w-[18%]">
                       Name
                     </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
+                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray w-[24%]">
                       Email
                     </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
+                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray w-[20%]">
                       Business
                     </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
+                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray w-[16%]">
                       Phone
                     </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
+                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray w-[10%]">
                       Status
                     </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
+                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray w-[12%]">
                       Actions
                     </th>
                   </tr>
@@ -186,18 +259,18 @@ const Leads = () => {
                   {filteredLeads.map((lead) => (
                     <tr
                       key={lead.id}
-                      className="border-b border-border hover:bg-tapwise-gray-light"
+                      className="border-b border-border hover:bg-tapwise-gray-light align-top"
                     >
-                      <td className="py-3 px-4 font-medium text-tapwise-black">
+                      <td className="py-3 px-4 font-medium text-tapwise-black whitespace-normal break-words">
                         {lead.name}
                       </td>
-                      <td className="py-3 px-4 text-tapwise-gray">
+                      <td className="py-3 px-4 text-tapwise-gray whitespace-normal break-words">
                         {lead.email}
                       </td>
-                      <td className="py-3 px-4 text-tapwise-gray">
+                      <td className="py-3 px-4 text-tapwise-gray whitespace-normal break-words">
                         {lead.businessName}
                       </td>
-                      <td className="py-3 px-4 text-tapwise-gray">
+                      <td className="py-3 px-4 text-tapwise-gray whitespace-normal break-words">
                         {lead.phoneNumber}
                       </td>
                       <td className="py-3 px-4">
@@ -210,7 +283,7 @@ const Leads = () => {
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           <button
                             className="h-8 w-8 rounded-md inline-flex items-center justify-center hover:bg-gray-100"
                             title="Edit"
@@ -260,7 +333,7 @@ const Leads = () => {
           </div>
         </div>
       ) : (
-        // Card grid view
+        // Card grid view (unchanged design)
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredLeads.map((lead) => (
             <div
@@ -269,11 +342,11 @@ const Leads = () => {
             >
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="font-semibold text-tapwise-black">
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-tapwise-black break-words">
                       {lead.name}
                     </h3>
-                    <p className="text-sm text-tapwise-gray">
+                    <p className="text-sm text-tapwise-gray break-words">
                       {lead.businessName}
                     </p>
                   </div>
@@ -287,8 +360,10 @@ const Leads = () => {
                 </div>
 
                 <div className="space-y-2 mb-4">
-                  <p className="text-sm text-tapwise-gray">{lead.email}</p>
-                  <p className="text-sm text-tapwise-gray">
+                  <p className="text-sm text-tapwise-gray break-words">
+                    {lead.email}
+                  </p>
+                  <p className="text-sm text-tapwise-gray break-words">
                     {lead.phoneNumber}
                   </p>
                   <p className="text-xs text-tapwise-gray">
@@ -296,7 +371,7 @@ const Leads = () => {
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <button className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-border">
                     <FiEdit className="h-4 w-4" />
                   </button>
