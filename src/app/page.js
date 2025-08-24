@@ -1,5 +1,5 @@
-import Image from "next/image";
+import Dashboard from "./pages/dashboard/page";
 
 export default function Home() {
-  return <h1>Next js is here</h1>;
+  return <Dashboard />;
 }
