@@ -65,14 +65,14 @@ const plans = [
 
 const SubscriptionComponents = () => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 --tapwise-border: 240 6% 90%; ">
       {/* Current Plan Overview */}
       <div className="border border-border rounded-lg bg-white shadow-soft">
         <div className="p-6 pb-3">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FaCrown className="h-5 w-5 mr-2 text-tapwise-yellow" />
             Current Plan
-          </h3>
+          </h3>s
         </div>
         <div className="p-6 pt-3">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -83,7 +83,7 @@ const SubscriptionComponents = () => {
               <div className="text-sm text-tapwise-gray">Current Plan</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-tapwise-yellow">$79</div>
+              <div className="text-2xl font-bold --tapwise-yellow">$79</div>
               <div className="text-sm text-tapwise-gray">Per Month</div>
             </div>
             <div className="text-center">

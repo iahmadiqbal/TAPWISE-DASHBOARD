@@ -95,7 +95,7 @@ export default function Profiles() {
 
         {/* Add Profile */}
         <div className="sm:col-start-3 sm:justify-self-end">
-          <button className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-tapwise-yellow text-tapwise-black hover:bg-tapwise-yellow-hover transition-colors">
+          <button className="inline-flex items-center justify-center h-9 px-4 rounded-md  transition-colors">
             <FiPlus className="h-4 w-4 mr-2" />
             Add Profile
           </button>

@@ -1,7 +1,14 @@
 @import "tailwindcss";
 
-:root{
-    --color-ahamad:yellow;
+:root {
+/* Brand Yellow */
+  --bg-tapwise-yellow: #FFD900; 
+   --tapwise-yellow-hover: #ffe657;  
+  --tapwise-black: #1E1E1E;            /* Deep Black */
+  --tapwise-gray: #6B7280;             /* Neutral Gray */
+  --tapwise-border: "#C2C2C2";
+  /* Success Green */
+  --text-color: #22C55E;              
 }
 
-    
+

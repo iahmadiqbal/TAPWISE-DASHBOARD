@@ -21,7 +21,7 @@ const StatsCards = () => (
         <div className="bg-color-ahmad">
           <p
             className="text-sm text-tapwise-gray"
-            style={{ color: "var(--color-ahamad)" }}
+            style={{ color: "var(--color-tapwise-yellow)" }}
           >
             Total Leads
           </p>

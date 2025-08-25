@@ -56,7 +56,7 @@ const Profiles = () => {
     },
   ];
 
-  // ------- Helpers (andar hi) -------
+  // ------- Helpers -------
   const getStatusColor = (status) => {
     switch (status) {
       case "active":
@@ -86,11 +86,30 @@ const Profiles = () => {
           <input
             type="text"
             placeholder="Search profiles..."
-            className="h-9 w-64 pl-10 rounded-md border border-border bg-white text-sm placeholder:text-tapwise-gray focus:outline-none"
+            className="
+              h-9 w-64 pl-10 rounded-md border border-border bg-white
+              text-sm placeholder:text-tapwise-gray focus:outline-none
+              focus:ring-2 focus:ring-[var(--bg-tapwise-yellow)]
+              focus:border-[var(--bg-tapwise-yellow)]
+              transition-colors
+            "
           />
         </div>
 
-        <button className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-tapwise-yellow text-tapwise-black hover:bg-tapwise-yellow-hover transition-colors">
+        {/* Add Profile */}
+        <button
+          className="
+            inline-flex items-center justify-center h-9 px-4 rounded-md
+            text-[color:var(--tapwise-black,#1E1E1E)]
+            bg-[var(--bg-tapwise-yellow)]
+            border border-border
+            hover:bg-[var(--tapwise-yellow-hover)]
+            hover:border-[var(--bg-tapwise-yellow)]
+            active:border-[var(--bg-tapwise-yellow)]
+            active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
+            transition-colors
+          "
+        >
           <FiPlus className="h-4 w-4 mr-2" />
           Add Profile
         </button>
@@ -101,13 +120,17 @@ const Profiles = () => {
         {mockProfiles.map((profile) => (
           <div
             key={profile.id}
-            className="border border-border rounded-lg bg-white shadow-soft hover:shadow-medium transition-shadow"
+            className="
+              border border-border rounded-lg bg-white shadow-soft
+              hover:shadow-medium transition-shadow
+              hover:border-[var(--bg-tapwise-yellow)]
+            "
           >
             {/* CardHeader */}
             <div className="p-6 pb-3">
               <div className="flex items-start justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-tapwise-yellow rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-tapwise-yellow)]">
                     <span className="font-semibold text-tapwise-black">
                       {getInitials(profile.name)}
                     </span>
@@ -123,7 +146,12 @@ const Profiles = () => {
                 </div>
 
                 <button
-                  className="h-8 w-8 rounded-md hover:bg-gray-100 inline-flex items-center justify-center"
+                  className="
+                    h-8 w-8 rounded-md inline-flex items-center justify-center
+                    hover:bg-[var(--tapwise-yellow-hover)]
+                    hover:border hover:border-[var(--bg-tapwise-yellow)]
+                    transition-colors
+                  "
                   aria-label="More"
                 >
                   <FiMoreHorizontal className="h-4 w-4" />
@@ -140,9 +168,13 @@ const Profiles = () => {
 
               <div className="flex items-center justify-between">
                 <span
-                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
-                    profile.status
-                  )}`}
+                  className={`
+                    inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
+                    border border-transparent cursor-pointer transition-colors
+                    ${getStatusColor(profile.status)}
+                    hover:bg-[var(--bg-tapwise-yellow)] hover:text-tapwise-black
+                    active:border-[var(--bg-tapwise-yellow)]
+                  `}
                 >
                   {profile.status}
                 </span>
@@ -158,18 +190,40 @@ const Profiles = () => {
                 <span>Last activity: {profile.lastActivity}</span>
               </div>
 
-              <div className="flex items-center space-x-2 pt-2">
-                <button className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-border text-sm transition-colors flex-1">
-                  <FiEye className="h-4 w-4 mr-1" />
-                  View
-                </button>
-                <button className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-border text-sm transition-colors flex-1">
-                  <FiEdit className="h-4 w-4 mr-1" />
-                  Edit
-                </button>
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2 pt-2">
+                {[
+                  { label: "View", icon: FiEye },
+                  { label: "Edit", icon: FiEdit },
+                ].map(({ label, icon: Icon }) => (
+                  <button
+                    key={label}
+                    className="
+                      flex-1 inline-flex items-center justify-center h-8 px-3 rounded-md
+                      border text-sm transition-colors
+                      bg-white border-border text-tapwise-black
+                      hover:bg-[var(--tapwise-yellow-hover)]
+                      hover:border-[var(--bg-tapwise-yellow)]
+                      active:border-[var(--bg-tapwise-yellow)]
+                      active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
+                    "
+                  >
+                    <Icon className="h-4 w-4 mr-1" />
+                    {label}
+                  </button>
+                ))}
+
                 <button
-                  className="inline-flex items-center justify-center h-8 px-2 rounded-md border border-border text-sm transition-colors"
                   title="Delete"
+                  className="
+                    inline-flex items-center justify-center h-8 px-2 rounded-md
+                    border text-sm transition-colors
+                    bg-white border-border text-tapwise-black
+                    hover:bg-[var(--tapwise-yellow-hover)]
+                    hover:border-[var(--bg-tapwise-yellow)]
+                    active:border-[var(--bg-tapwise-yellow)]
+                    active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
+                  "
                 >
                   <FiTrash2 className="h-4 w-4 text-red-500" />
                 </button>
@@ -179,25 +233,27 @@ const Profiles = () => {
         ))}
       </div>
 
-      {/* Summary Stats */}
+      {/* Summary Stats (NO HOVER) */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="border border-border rounded-lg bg-white shadow-soft">
           <div className="p-4 text-center">
-            <div className="text-2xl font-bold text-tapwise-yellow">4</div>
+            <div className="text-2xl font-bold text-[color:var(--bg-tapwise-yellow)]">
+              4
+            </div>
             <div className="text-sm text-tapwise-gray">Total Profiles</div>
           </div>
         </div>
 
         <div className="border border-border rounded-lg bg-white shadow-soft">
           <div className="p-4 text-center">
-            <div className="text-2xl font-bold text-green-500">2</div>
+            <div className="text-2xl font-bold text-green-600">2</div>
             <div className="text-sm text-tapwise-gray">Active</div>
           </div>
         </div>
 
         <div className="border border-border rounded-lg bg-white shadow-soft">
           <div className="p-4 text-center">
-            <div className="text-2xl font-bold text-yellow-500">1</div>
+            <div className="text-2xl font-bold text-yellow-600">1</div>
             <div className="text-sm text-tapwise-gray">Pending</div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// NOTE: adjust this import if you use a path alias like "@/components/...".
+//  adjust this import if you use a path alias like "@/components/...".
 import Sidebar from "@/components/sidebar/page";
 import Topbar from "@/components/topbar/page";
 

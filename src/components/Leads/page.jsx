@@ -12,7 +12,7 @@ import {
 } from "react-icons/fi";
 
 const Leads = () => {
-  // -------- Mock data (JS) --------
+  // -------- Dummy data of js --------
   const mockLeads = [
     {
       id: "1",
@@ -49,6 +49,24 @@ const Leads = () => {
       phoneNumber: "+1 234-567-8904",
       status: "converted",
       dateAdded: "2024-01-12",
+    },
+    {
+      id: "3",
+      name: "Michael Chen",
+      email: "michael@design.com",
+      businessName: "Creative Studio",
+      phoneNumber: "+1 234-567-8903",
+      status: "pending",
+      dateAdded: "2024-01-13",
+    },
+    {
+      id: "3",
+      name: "Michael Chen",
+      email: "michael@design.com",
+      businessName: "Creative Studio",
+      phoneNumber: "+1 234-567-8903",
+      status: "pending",
+      dateAdded: "2024-01-13",
     },
   ];
 
