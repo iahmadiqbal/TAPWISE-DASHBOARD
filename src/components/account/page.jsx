@@ -28,7 +28,9 @@ const AccountComponents = () => {
           {/* Profile Picture */}
           <div className="flex items-center space-x-6">
             <div className="w-20 h-20 bg-tapwise-yellow rounded-full flex items-center justify-center">
-              <span className="text-2xl font-bold text-tapwise-black">JD</span>
+              <span className="text-2xl font-bold text-tapwise-black  ">
+                JD
+              </span>
             </div>
             <div>
               <button

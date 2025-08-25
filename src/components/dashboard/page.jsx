@@ -18,9 +18,14 @@ const StatsCards = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     <div className="border border-border rounded-lg bg-white shadow-soft hover:shadow-medium transition-shadow p-4">
       <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-tapwise-gray">Total Leads</p>
-          <p className="text-2xl font-bold text-tapwise-black">1,248</p>
+        <div className="bg-color-ahmad">
+          <p
+            className="text-sm text-tapwise-gray"
+            style={{ color: "var(--color-ahamad)" }}
+          >
+            Total Leads
+          </p>
+          <p className="text-2xl font-bold text-ahmad">1,248</p>
         </div>
         <FiUsers className="h-8 w-8 text-tapwise-yellow" />
       </div>
