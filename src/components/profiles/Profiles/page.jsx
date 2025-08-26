@@ -12,10 +12,8 @@ import {
 } from "react-icons/fi";
 import { LuQrCode } from "react-icons/lu";
 
-// ------- dummy  data (same) -------
-const mockProfiles = [
-  /* ...same as your code... */
-];
+// ------- Dummy Data
+const mockProfiles = [];
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -39,8 +37,8 @@ const getInitials = (name = "") =>
 
 export default function Profiles() {
   return (
+    //  added font system
     <div className="space-y-6 font-system">
-      {/* 👈 added font-system */}
       {/* Header Actions: mobile -> row (button right), sm+ -> 3-col grid (search centered) */}
       <div className="flex items-center justify-between gap-2 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
         {/* Search */}
