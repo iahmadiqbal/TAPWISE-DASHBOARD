@@ -12,48 +12,9 @@ import {
 } from "react-icons/fi";
 import { LuQrCode } from "react-icons/lu";
 
-// ------- Mock data (same) -------
+// ------- dummy  data (same) -------
 const mockProfiles = [
-  {
-    id: "1",
-    name: "Sarah Johnson",
-    email: "sarah@techsolutions.com",
-    company: "Tech Solutions Inc.",
-    cardId: "NFC-001",
-    status: "active",
-    lastActivity: "2 hours ago",
-    scans: 145,
-  },
-  {
-    id: "2",
-    name: "Michael Chen",
-    email: "michael@creativeagency.com",
-    company: "Creative Agency",
-    cardId: "NFC-002",
-    status: "active",
-    lastActivity: "5 hours ago",
-    scans: 89,
-  },
-  {
-    id: "3",
-    name: "Emily Davis",
-    email: "emily@marketingpro.com",
-    company: "Marketing Pro",
-    cardId: "NFC-003",
-    status: "pending",
-    lastActivity: "1 day ago",
-    scans: 34,
-  },
-  {
-    id: "4",
-    name: "James Wilson",
-    email: "james@startup.com",
-    company: "Startup Hub",
-    cardId: "NFC-004",
-    status: "inactive",
-    lastActivity: "3 days ago",
-    scans: 267,
-  },
+  /* ...same as your code... */
 ];
 
 const getStatusColor = (status) => {
@@ -78,7 +39,8 @@ const getInitials = (name = "") =>
 
 export default function Profiles() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-system">
+      {/* 👈 added font-system */}
       {/* Header Actions: mobile -> row (button right), sm+ -> 3-col grid (search centered) */}
       <div className="flex items-center justify-between gap-2 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
         {/* Search */}
@@ -95,7 +57,7 @@ export default function Profiles() {
 
         {/* Add Profile */}
         <div className="sm:col-start-3 sm:justify-self-end">
-          <button className="inline-flex items-center justify-center h-9 px-4 rounded-md  transition-colors">
+          <button className="inline-flex items-center justify-center h-9 px-4 rounded-md transition-colors">
             <FiPlus className="h-4 w-4 mr-2" />
             Add Profile
           </button>

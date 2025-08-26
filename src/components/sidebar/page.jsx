@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import {
   LuLayoutDashboard as LayoutDashboard,
   LuUsers as Users,
@@ -53,7 +52,8 @@ export default function Sidebar() {
         <Menu className="h-5 w-5" />
       </button>
 
-      {/* Backdrop for mobile */}
+      {/* Backdrop (background overlay behind the menu) */}
+
       {isOpenMobile && (
         <div
           className="fixed inset-0 z-40 bg-black/30 md:hidden"
@@ -62,19 +62,24 @@ export default function Sidebar() {
         />
       )}
 
-      {/* Sidebar container */}
-      <div
+      {/* Sidebar */}
+      <aside
         className={[
           "bg-white border-r border-gray-200",
-          "fixed md:static inset-y-0 left-0 z-50 md:z-0",
-          "h-[100dvh] md:h-screen flex flex-col",
+
+          "fixed md:relative inset-y-0 left-0 z-50 md:z-0",
+
+          "h-[100dvh] md:h-[100dvh] flex flex-col overflow-y-auto overscroll-contain",
+
+          "w-72 md:w-64",
+
           "transition-transform duration-300 ease-in-out",
-          "md:w-64 w-72", // fixed width
           isOpenMobile ? "translate-x-0" : "-translate-x-full md:translate-x-0",
-          "overflow-y-auto overscroll-contain",
+          // in desktop there is  no overlap
+          "md:sticky md:top-0 md:self-start",
         ].join(" ")}
       >
-        {/* Header with Single Logo */}
+        {/* header + Logo */}
         <div className="h-14 px-4 border-b border-gray-200 flex items-center justify-center sticky top-0 bg-white z-20">
           <Link
             href="/pages/dashboard"
@@ -128,7 +133,7 @@ export default function Sidebar() {
             <span className="ml-3">Logout</span>
           </button>
         </div>
-      </div>
+      </aside>
     </>
   );
 }

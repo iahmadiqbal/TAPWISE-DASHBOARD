@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
-:root {
-/* Brand Yellow */
-  --bg-tapwise-yellow: #FFD900; 
-   --tapwise-yellow-hover: #ffe657;  
-  --tapwise-black: #1E1E1E;            /* Deep Black */
-  --tapwise-gray: #6B7280;             /* Neutral Gray */
-  --tapwise-border: "#C2C2C2";
-  /* Success Green */
-  --text-color: #22C55E;              
-}
+@layer base {
+  :root {
+    /* dashboard brand Colors */
+    --bg-tapwise-yellow: #FFD900;
+    --tapwise-yellow-hover: #ffe657;
+    --tapwise-black: #1E1E1E;
+    --tapwise-gray: #6B7280;
+    --tapwise-border: #C2C2C2;
+    --text-color: #22C55E;
+  }
 
+     /* font-family */
+  html, body, .font-system, .font-system * {
+    font-family: ui-sans-serif, system-ui, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+  }
+}

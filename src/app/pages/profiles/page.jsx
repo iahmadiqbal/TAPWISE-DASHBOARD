@@ -55,7 +55,7 @@ const Profiles = () => {
     },
   ];
 
-  // ------- Status-------
+  // ------- Status Colors -------
   const getStatusColor = (status) => {
     switch (status) {
       case "active":
@@ -77,9 +77,9 @@ const Profiles = () => {
       .toUpperCase();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-system">
       {/* Header Actions */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center font-system">
         <div className="relative">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tapwise-gray h-4 w-4" />
           <input
@@ -115,26 +115,22 @@ const Profiles = () => {
       </div>
 
       {/* Profiles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-system">
         {mockProfiles.map((profile) => (
           <div
             key={profile.id}
-            className=" rounded-lg 
-    bg-white 
-    shadow-soft 
-         border border-[var(--color-gray-200)]
-    transition-shadow "
+            className="rounded-lg bg-white shadow-soft border border-[var(--color-gray-200)] transition-shadow font-system"
           >
             {/* CardHeader */}
-            <div className="p-6 pb-3">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
+            <div className="p-6 pb-3 font-system">
+              <div className="flex items-start justify-between font-system">
+                <div className="flex items-center space-x-3 font-system">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-tapwise-yellow)]">
                     <span className="font-semibold text-tapwise-black">
                       {getInitials(profile.name)}
                     </span>
                   </div>
-                  <div>
+                  <div className="font-system">
                     <h3 className="font-semibold text-tapwise-black">
                       {profile.name}
                     </h3>
@@ -159,13 +155,13 @@ const Profiles = () => {
             </div>
 
             {/* CardContent */}
-            <div className="p-6 pt-3 space-y-4">
+            <div className="p-6 pt-3 space-y-4 font-system">
               <div>
                 <p className="text-sm text-tapwise-gray">{profile.email}</p>
                 <p className="text-sm text-tapwise-gray">{profile.company}</p>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between font-system">
                 <span
                   className={`
                     inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
@@ -190,7 +186,7 @@ const Profiles = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-2 pt-2">
+              <div className="flex items-center gap-2 pt-2 font-system">
                 {[
                   { label: "View", icon: FiEye },
                   { label: "Edit", icon: FiEdit },
@@ -198,14 +194,14 @@ const Profiles = () => {
                   <button
                     key={label}
                     className="
-                      flex-1 inline-flex items-center justify-center h-8 px-3 rounded-md
-                      border text-sm transition-colors
-                      bg-white border-border text-tapwise-black
-                      hover:bg-[var(--tapwise-yellow-hover)]
-                      hover:border-[var(--bg-tapwise-yellow)]
-                      active:border-[var(--bg-tapwise-yellow)]
-                      active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
-                    "
+                        flex-1 inline-flex items-center justify-center h-8 px-3 rounded-md
+                        border text-sm transition-colors
+                        bg-white border-border text-tapwise-black
+                        hover:bg-[var(--tapwise-yellow-hover)]
+                        hover:border-[var(--bg-tapwise-yellow)]
+                        active:border-[var(--bg-tapwise-yellow)]
+                        active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
+                      "
                   >
                     <Icon className="h-4 w-4 mr-1" />
                     {label}
@@ -233,9 +229,9 @@ const Profiles = () => {
       </div>
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="border border-border rounded-lg bg-white shadow-soft">
-          <div className="p-4 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 font-system">
+        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
+          <div className="p-4 text-center font-system">
             <div className="text-2xl font-bold text-[color:var(--bg-tapwise-yellow)]">
               4
             </div>
@@ -243,22 +239,22 @@ const Profiles = () => {
           </div>
         </div>
 
-        <div className="border border-border rounded-lg bg-white shadow-soft">
-          <div className="p-4 text-center">
+        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
+          <div className="p-4 text-center font-system">
             <div className="text-2xl font-bold text-green-600">2</div>
             <div className="text-sm text-tapwise-gray">Active</div>
           </div>
         </div>
 
-        <div className="border border-border rounded-lg bg-white shadow-soft">
-          <div className="p-4 text-center">
+        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
+          <div className="p-4 text-center font-system">
             <div className="text-2xl font-bold text-yellow-600">1</div>
             <div className="text-sm text-tapwise-gray">Pending</div>
           </div>
         </div>
 
-        <div className="border border-border rounded-lg bg-white shadow-soft">
-          <div className="p-4 text-center">
+        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
+          <div className="p-4 text-center font-system">
             <div className="text-2xl font-bold text-tapwise-black">535</div>
             <div className="text-sm text-tapwise-gray">Total Scans</div>
           </div>
