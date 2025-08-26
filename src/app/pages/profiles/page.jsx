@@ -12,7 +12,7 @@ import {
 import { LuQrCode } from "react-icons/lu";
 
 const Profiles = () => {
-  // ------- Mock data -------
+  // ------- Dummy data -------
   const mockProfiles = [
     {
       id: "1",
@@ -56,7 +56,7 @@ const Profiles = () => {
     },
   ];
 
-  // ------- Helpers -------
+  // ------- Status-------
   const getStatusColor = (status) => {
     switch (status) {
       case "active":
@@ -120,11 +120,11 @@ const Profiles = () => {
         {mockProfiles.map((profile) => (
           <div
             key={profile.id}
-            className="
-              border border-border rounded-lg bg-white shadow-soft
-              hover:shadow-medium transition-shadow
-              hover:border-[var(--bg-tapwise-yellow)]
-            "
+            className=" rounded-lg 
+    bg-white 
+    shadow-soft 
+         border border-[var(--color-gray-200)]
+    transition-shadow "
           >
             {/* CardHeader */}
             <div className="p-6 pb-3">
@@ -233,7 +233,7 @@ const Profiles = () => {
         ))}
       </div>
 
-      {/* Summary Stats (NO HOVER) */}
+      {/* Summary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="border border-border rounded-lg bg-white shadow-soft">
           <div className="p-4 text-center">
