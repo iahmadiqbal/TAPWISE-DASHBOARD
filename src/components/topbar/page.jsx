@@ -11,15 +11,12 @@ export default function Topbar() {
           <FiThumbsUp className="h-5 w-5 text-gray-700" />
         </div>
 
-        {/* user avatar */}
+        {/* user profile avatar */}
         <img
           src="/images/profile-avatar-1.png"
           alt="User avatar"
           className="h-8 w-8 rounded-full border border-[var(--tapwise-border)] object-cover"
           loading="lazy"
-          width={32}
-          height={32}
-          decoding="async"
         />
       </div>
     </header>
