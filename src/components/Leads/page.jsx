@@ -98,7 +98,7 @@ const Leads = () => {
               placeholder="Search leads..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="h-9 w-full pl-10 rounded-md border border-gray-200 bg-white text-sm placeholder:text-tapwise-gray focus:outline-none"
+              className="h-9 w-full pl-10 rounded-md border border-gray-200 bg-white text-sm placeholder:text-tapwise-gray focus:outline-none focus:border-[var(--tapwise-yellow-hover)] focus:ring-1 focus:ring-[var(--tapwise-yellow-hover)] transition-colors"
             />
           </div>
 
