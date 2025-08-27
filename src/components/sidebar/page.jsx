@@ -12,6 +12,7 @@ import {
   LuCreditCard as CreditCard,
   LuLogOut as LogOut,
   LuMenu as Menu,
+  LuX as Close, // ✅ Close icon
 } from "react-icons/lu";
 
 const navigation = [
@@ -52,8 +53,7 @@ export default function Sidebar() {
         <Menu className="h-5 w-5" />
       </button>
 
-      {/* Backdrop (background overlay behind the menu) */}
-
+      {/* Backdrop */}
       {isOpenMobile && (
         <div
           className="fixed inset-0 z-40 bg-black/30 md:hidden"
@@ -66,21 +66,16 @@ export default function Sidebar() {
       <aside
         className={[
           "bg-white border-r border-gray-200",
-
           "fixed md:relative inset-y-0 left-0 z-50 md:z-0",
-
           "h-[100dvh] md:h-[100dvh] flex flex-col overflow-y-auto overscroll-contain",
-
           "w-72 md:w-64",
-
           "transition-transform duration-300 ease-in-out",
           isOpenMobile ? "translate-x-0" : "-translate-x-full md:translate-x-0",
-          // in desktop there is  no overlap
           "md:sticky md:top-0 md:self-start",
         ].join(" ")}
       >
         {/* header + Logo */}
-        <div className="h-14 px-4 border-b border-gray-200 flex items-center justify-center sticky top-0 bg-white z-20">
+        <div className="h-14 px-4 border-b border-gray-200 flex items-center justify-center sticky top-0 bg-white z-20 relative">
           <Link
             href="/pages/dashboard"
             className="font-semibold text-xl leading-none"
@@ -91,6 +86,18 @@ export default function Sidebar() {
               className="h-10 w-auto"
             />
           </Link>
+
+          {/* ✅ Close button (mobile only, when open) */}
+          {isOpenMobile && (
+            <button
+              type="button"
+              onClick={() => setIsOpenMobile(false)}
+              aria-label="Close sidebar"
+              className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-9 w-9 items-center justify-center rounded-md bg-white border border-gray-200 shadow-soft"
+            >
+              <Close className="h-5 w-5" />
+            </button>
+          )}
         </div>
 
         {/* Navigation */}
