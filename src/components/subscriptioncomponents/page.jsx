@@ -65,14 +65,14 @@ const plans = [
 
 const SubscriptionComponents = () => {
   return (
-    <div className="space-y-8 --tapwise-border: 240 6% 90%; ">
+    <div className="space-y-8">
       {/* Current Plan Overview */}
-      <div className="border border-border rounded-lg bg-white shadow-soft">
+      <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
         <div className="p-6 pb-3">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FaCrown className="h-5 w-5 mr-2 text-tapwise-yellow" />
             Current Plan
-          </h3>s
+          </h3>
         </div>
         <div className="p-6 pt-3">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -102,7 +102,7 @@ const SubscriptionComponents = () => {
 
       {/* Usage Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="border border-border rounded-lg bg-white shadow-soft">
+        <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
           <div className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -117,7 +117,7 @@ const SubscriptionComponents = () => {
           </div>
         </div>
 
-        <div className="border border-border rounded-lg bg-white shadow-soft">
+        <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
           <div className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -132,7 +132,7 @@ const SubscriptionComponents = () => {
           </div>
         </div>
 
-        <div className="border border-border rounded-lg bg-white shadow-soft">
+        <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
           <div className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -155,7 +155,7 @@ const SubscriptionComponents = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan, idx) => {
-            const cardClasses = `border border-border rounded-lg bg-white shadow-soft relative ${
+            const cardClasses = `border border-gray-200 rounded-lg bg-white shadow-soft relative ${
               plan.current ? "ring-2 ring-tapwise-yellow" : ""
             } ${plan.popular ? "border-tapwise-yellow" : ""}`;
 
@@ -220,7 +220,7 @@ const SubscriptionComponents = () => {
       </div>
 
       {/* Billing History */}
-      <div className="border border-border rounded-lg bg-white shadow-soft">
+      <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
         <div className="p-6 pb-3">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FiCreditCard className="h-5 w-5 mr-2" />
@@ -248,7 +248,7 @@ const SubscriptionComponents = () => {
             ].map((row, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between p-4 border border-border rounded-lg"
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
               >
                 <div className="flex items-center space-x-4">
                   <FiCalendar className="h-5 w-5 text-tapwise-gray" />
