@@ -9,12 +9,8 @@
     --tapwise-gray: #6B7280;
     --tapwise-border: #C2C2C2;
     --text-color: #22C55E;
-   
-  }
-
-     /* font-family */
-  html, body, .font-system, .font-system * {
-    font-family: ui-sans-serif, system-ui, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
   }
 }
+
+ 
+
