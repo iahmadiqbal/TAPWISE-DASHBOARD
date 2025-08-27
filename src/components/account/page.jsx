@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   FiUser,
   FiMail,
@@ -17,8 +16,8 @@ const AccountComponents = () => {
   return (
     <div className="max-w-4xl space-y-6">
       {/* Profile Information */}
-      <div className="border border-border rounded-lg bg-white shadow-soft">
-        <div className="p-6 pb-3">
+      <div className="border border-gray-200  rounded-lg bg-white shadow-soft">
+        <div className="p-6 pb-3 ">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FiUser className="h-5 w-5 mr-2" />
             Profile Information
@@ -26,28 +25,24 @@ const AccountComponents = () => {
         </div>
         <div className="p-6 pt-3 space-y-6">
           {/* Profile Picture */}
-          <div className="flex items-center space-x-6">
-            <div className="w-20 h-20 bg-tapwise-yellow rounded-full flex items-center justify-center">
-              <span className="text-2xl font-bold text-tapwise-black  ">
-                JD
-              </span>
+          <div className="flex items-center space-x-6 border-b border-gray-200 pb-6">
+            <div className="w-20 h-20 rounded-full flex items-center justify-center  bg-[var(--bg-tapwise-yellow)]">
+              <span className="text-2xl font-bold text-tapwise-black ">JD</span>
             </div>
             <div>
               <button
                 type="button"
-                className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-border text-sm"
+                className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-gray-300 text-sm transition-colors hover:bg-[var(--tapwise-yellow-hover)]"
               >
                 <FiCamera className="h-4 w-4 mr-2" />
                 Change Photo
               </button>
-              <p className="text-xs text-tapwise-gray mt-1">
+
+              <p className="text-xs text-tapwise-gray mt-1 ">
                 JPG, PNG up to 2MB
               </p>
             </div>
           </div>
-
-          {/* Separator */}
-          <div className="border-t border-border" />
 
           {/* Personal Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -58,7 +53,7 @@ const AccountComponents = () => {
               <input
                 id="firstName"
                 defaultValue="John"
-                className="h-9 w-full rounded-md border border-border bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
+                className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
               />
             </div>
 
@@ -69,7 +64,7 @@ const AccountComponents = () => {
               <input
                 id="lastName"
                 defaultValue="Doe"
-                className="h-9 w-full rounded-md border border-border bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
+                className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
               />
             </div>
 
@@ -83,7 +78,7 @@ const AccountComponents = () => {
                   id="email"
                   type="email"
                   defaultValue="john@example.com"
-                  className="h-9 w-full rounded-md border border-border bg-white text-sm pl-10 pr-3 placeholder:text-tapwise-gray focus:outline-none"
+                  className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm pl-10 pr-3 placeholder:text-tapwise-gray focus:outline-none"
                 />
               </div>
             </div>
@@ -97,7 +92,7 @@ const AccountComponents = () => {
                 <input
                   id="phone"
                   defaultValue="+1 234-567-8900"
-                  className="h-9 w-full rounded-md border border-border bg-white text-sm pl-10 pr-3 placeholder:text-tapwise-gray focus:outline-none"
+                  className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm pl-10 pr-3 placeholder:text-tapwise-gray focus:outline-none"
                 />
               </div>
             </div>
@@ -106,8 +101,8 @@ const AccountComponents = () => {
       </div>
 
       {/* Company Information */}
-      <div className="border border-border rounded-lg bg-white shadow-soft">
-        <div className="p-6 pb-3">
+      <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
+        <div className="p-6 pb-3 border-b border-gray-200">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FiBriefcase className="h-5 w-5 mr-2" />
             Company Information
@@ -122,7 +117,7 @@ const AccountComponents = () => {
               <input
                 id="company"
                 defaultValue="Tech Solutions Inc."
-                className="h-9 w-full rounded-md border border-border bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
+                className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
               />
             </div>
 
@@ -133,7 +128,7 @@ const AccountComponents = () => {
               <input
                 id="position"
                 defaultValue="CEO"
-                className="h-9 w-full rounded-md border border-border bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
+                className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm px-3 placeholder:text-tapwise-gray focus:outline-none"
               />
             </div>
 
@@ -146,7 +141,7 @@ const AccountComponents = () => {
                 <input
                   id="address"
                   defaultValue="123 Business St, City, State 12345"
-                  className="h-9 w-full rounded-md border border-border bg-white text-sm pl-10 pr-3 placeholder:text-tapwise-gray focus:outline-none"
+                  className="h-9 w-full rounded-md border border-gray-200 bg-white text-sm pl-10 pr-3 placeholder:text-tapwise-gray focus:outline-none"
                 />
               </div>
             </div>
@@ -155,49 +150,43 @@ const AccountComponents = () => {
       </div>
 
       {/* Security Settings */}
-      <div className="border border-border rounded-lg bg-white shadow-soft">
-        <div className="p-6 pb-3">
+      <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
+        <div className="p-6 pb-3 ">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FiShield className="h-5 w-5 mr-2" />
             Security Settings
           </h3>
         </div>
         <div className="p-6 pt-0 space-y-4">
-          <div className="flex items-center justify-between p-4 border border-border rounded-lg">
+          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
             <div className="flex items-center space-x-3">
               <FiLock className="h-5 w-5 text-tapwise-gray" />
               <div>
                 <p className="font-medium text-tapwise-black">
                   Change Password
                 </p>
-                <p className="text-sm text-tapwise-gray">
-                  Update your account password
-                </p>
               </div>
             </div>
             <button
               type="button"
-              className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-border text-sm"
+              className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-gray-200 text-sm transition-colors hover:bg-[var(--tapwise-yellow-hover)]"
             >
               Change
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border border-border rounded-lg">
+          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
             <div className="flex items-center space-x-3">
               <FiShield className="h-5 w-5 text-tapwise-gray" />
               <div>
                 <p className="font-medium text-tapwise-black">
                   Two-Factor Authentication
                 </p>
-                <p className="text-sm text-tapwise-gray">
-                  Add an extra layer of security
-                </p>
               </div>
             </div>
             <button
               type="button"
-              className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-border text-sm"
+              className="inline-flex items-center justify-center h-8 px-3 rounded-md border border-gray-200 text-sm transition-colors hover:bg-[var(--tapwise-yellow-hover)]"
             >
               Enable
             </button>
@@ -206,43 +195,28 @@ const AccountComponents = () => {
       </div>
 
       {/* Notification Preferences */}
-      <div className="border border-border rounded-lg bg-white shadow-soft">
-        <div className="p-6 pb-3">
+      <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
+        <div className="p-6 pb-3 ">
           <h3 className="text-tapwise-black font-semibold flex items-center">
             <FiBell className="h-5 w-5 mr-2" />
             Notification Preferences
           </h3>
         </div>
         <div className="p-6 pt-0 space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-tapwise-black">
-                Email Notifications
-              </p>
-              <p className="text-sm text-tapwise-gray">
-                Receive updates via email
-              </p>
-            </div>
+          <div className="flex items-center justify-between pb-4">
+            <p className="font-medium text-tapwise-black">
+              Email Notifications
+            </p>
+            <input type="checkbox" defaultChecked className="rounded" />
+          </div>
+
+          <div className="flex items-center justify-between pb-4 ">
+            <p className="font-medium text-tapwise-black">Lead Alerts</p>
             <input type="checkbox" defaultChecked className="rounded" />
           </div>
 
           <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-tapwise-black">Lead Alerts</p>
-              <p className="text-sm text-tapwise-gray">
-                Get notified about new leads
-              </p>
-            </div>
-            <input type="checkbox" defaultChecked className="rounded" />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-tapwise-black">Card Activity</p>
-              <p className="text-sm text-tapwise-gray">
-                Notifications for card scans
-              </p>
-            </div>
+            <p className="font-medium text-tapwise-black">Card Activity</p>
             <input type="checkbox" className="rounded" />
           </div>
         </div>
@@ -252,13 +226,14 @@ const AccountComponents = () => {
       <div className="flex space-x-4">
         <button
           type="button"
-          className="bg-tapwise-yellow text-tapwise-black hover:bg-tapwise-yellow-hover h-9 px-4 rounded-md"
+          className="text-tapwise-black border border-gray-200 h-9 px-4 rounded-md transition-colors bg-[var(--bg-tapwise-yellow)] hover:bg-[var(--tapwise-yellow-hover)]"
         >
           Save Changes
         </button>
+
         <button
           type="button"
-          className="h-9 px-4 rounded-md border border-border text-sm"
+          className="h-9 px-4 rounded-md border border-gray-200 text-sm transition-colors hover:bg-[var(--bg-tapwise-yellow)]"
         >
           Cancel
         </button>
