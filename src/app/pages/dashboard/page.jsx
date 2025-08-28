@@ -1,9 +1,11 @@
-import DashboardComponents from "@/components/dashboard/page";
+import DashboardStats from "@/components/dashboard/page";
+import FilterBar from "@/components/dashboardcomponents/filterbar/page";
 
 const Dashboard = () => {
   return (
     <>
-      <DashboardComponents />
+      <DashboardStats />
+      <FilterBar />
     </>
   );
 };
