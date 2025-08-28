@@ -1,176 +1,66 @@
 "use client";
+import React from "react";
 
-import React, { useMemo } from "react";
-import { FiUsers, FiTrendingUp, FiZap, FiCreditCard } from "react-icons/fi";
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
-
-const DashboardComponents = () => {
-  const { yellow, yellowHover, black, darkGray, gray100, gray200 } =
-    useMemo(() => {
-      if (typeof window === "undefined") {
-        return {
-          yellow: "#FFD900",
-          yellowHover: "#FFE657",
-          black: "#1E1E1E",
-          darkGray: "#374151",
-          gray100: "#F3F4F6",
-          gray200: "#D1D5DB",
-        };
-      }
-      const css = getComputedStyle(document.documentElement);
-      return {
-        yellow: css.getPropertyValue("--bg-tapwise-yellow").trim() || "#FFD900",
-        yellowHover:
-          css.getPropertyValue("--tapwise-yellow-hover").trim() || "#FFE657",
-        black: css.getPropertyValue("--tapwise-black").trim() || "#1E1E1E",
-        darkGray: "#374151",
-        gray100: "#F3F4F6",
-        gray200: "#D1D5DB",
-      };
-    }, []);
-
-  // 🔹 Left Chart: Now has an extra slice with value 2
-  const leadsTop5 = [
-    { name: "Muhammad Ali", value: 5, fill: black },
-    { name: "Sarah J.", value: 4, fill: darkGray },
-    { name: "Michael C.", value: 3, fill: gray200 },
-    { name: "Ayesha K.", value: 2, fill: gray100 },
-    { name: "John S.", value: 1, fill: yellowHover },
-    { name: "Extra User", value: 2, fill: yellow }, // 🔥 Added this slice
-  ];
-
-  const tapsTop5 = [
-    { name: "Tech Corp", value: 5, fill: yellow },
-    { name: "Design Co.", value: 4, fill: yellowHover },
-    { name: "Marketing Pro", value: 3, fill: black },
-    { name: "Creative Studio", value: 2, fill: darkGray },
-    { name: "Blue Ocean", value: 1, fill: gray200 },
-  ];
-
+const DashboardStats = () => {
   return (
-    <div className="space-y-6">
-      {/* 🔹 Stats Boxes (unchanged) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="rounded-xl p-5 border border-gray-200 bg-white shadow-soft hover:shadow-medium transition-shadow">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
-            <div>
-              <p className="text-xs text-[var(--tapwise-gray)]">
-                Used Profiles
-              </p>
-              <p className="text-xl font-bold text-[var(--tapwise-black)]">
-                13 / 41
-              </p>
-            </div>
-            <FiUsers className="h-7 w-7 text-tapwise-yellow" />
-          </div>
-          <p className="text-xs text-[var(--tapwise-gray)]">
-            31.7% of total profiles used
-          </p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* Total Profiles */}
+      <div className="p-5 bg-white rounded-lg shadow-[0_2px_6px_rgba(0,0,0,0.08)] border border-solid border-[var(--border-color)]">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-[500] text-gray-700">
+            Total Profiles
+          </span>
+          <i className="fi fi-rr-users-alt text-[var(--bg-tapwise-yellow)] text-[24px]" />
         </div>
-        <div className="rounded-xl p-5 border border-gray-200 bg-white shadow-soft hover:shadow-medium transition-shadow">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
-            <div>
-              <p className="text-xs text-[var(--tapwise-gray)]">
-                Profile Visits
-              </p>
-              <p className="text-xl font-bold text-[var(--tapwise-black)]">
-                Total Taps: 86
-              </p>
-            </div>
-            <FiTrendingUp className="h-7 w-7 text-tapwise-yellow" />
-          </div>
-          <p className="text-xs text-red-500">This week: 7 (-81%)</p>
-        </div>
-        <div className="rounded-xl p-5 border border-gray-200 bg-white shadow-soft hover:shadow-medium transition-shadow">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
-            <div>
-              <p className="text-xs text-[var(--tapwise-gray)]">New Leads</p>
-              <p className="text-xl font-bold text-[var(--tapwise-black)]">
-                Total Leads: 18
-              </p>
-            </div>
-            <FiZap className="h-7 w-7 text-tapwise-yellow" />
-          </div>
-          <p className="text-xs text-green-500">This week: 1 (+100%)</p>
-        </div>
-        <div className="rounded-xl p-5 border border-gray-200 bg-white shadow-soft hover:shadow-medium transition-shadow">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
-            <div>
-              <p className="text-xs text-[var(--tapwise-gray)]">MRR</p>
-              <p className="text-xl font-bold text-[var(--tapwise-black)]">
-                $3,276
-              </p>
-            </div>
-            <FiCreditCard className="h-7 w-7 text-tapwise-yellow" />
-          </div>
-          <p className="text-xs text-[var(--tapwise-gray)]">
-            Professional plan
-          </p>
+        <h3 className="text-2xl font-bold text-gray-900 mt-2">41</h3>
+        {/* Progress Bar */}
+        <div className="w-full h-4 bg-[var(--secondary-white)] rounded-md overflow-hidden mt-2">
+          <div
+            className="h-4 bg-[var(--bg-tapwise-yellow)] transition-[width] duration-500 ease-in-out rounded-md"
+            style={{ width: "31.7%" }}
+          />
         </div>
       </div>
 
-      {/* 🔹 Charts */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Chart */}
-        <div className="rounded-xl border border-gray-200 bg-white shadow-soft hover:shadow-medium transition-shadow">
-          <div className="flex items-center justify-between border-b border-gray-200 px-5 py-3">
-            <h3 className="text-sm font-medium text-[var(--tapwise-black)]">
-              Top 5 by Leads Users
-            </h3>
-          </div>
-          <div className="p-5">
-            <div className="w-full h-64 sm:h-72 lg:h-80 xl:h-96">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={leadsTop5}
-                    dataKey="value"
-                    nameKey="name"
-                    outerRadius="80%"
-                    paddingAngle={2}
-                    stroke="#fff"
-                    strokeWidth={2}
-                    label
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+      {/* Used Profiles */}
+      <div className="p-5 bg-white rounded-lg shadow-[0_2px_6px_rgba(0,0,0,0.08)] border border-solid border-[var(--border-color)]">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-[500] text-gray-700">
+            Used Profiles
+          </span>
+          <i className="fi fi-rr-users text-[var(--text-color)] text-[24px]" />
         </div>
+        <h3 className="text-2xl font-bold text-gray-900 mt-2">13</h3>
+        <span className="text-sm text-green-500 mt-1">31.7% used</span>
+      </div>
 
-        {/* Right Chart */}
-        <div className="rounded-xl border border-gray-200 bg-white shadow-soft hover:shadow-medium transition-shadow">
-          <div className="flex items-center justify-between border-b border-gray-200 px-5 py-3">
-            <h3 className="text-sm font-medium text-[var(--tapwise-black)]">
-              Top 5 by Taps Users
-            </h3>
-          </div>
-          <div className="p-5">
-            <div className="w-full h-64 sm:h-72 lg:h-80 xl:h-96">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={tapsTop5}
-                    dataKey="value"
-                    nameKey="name"
-                    outerRadius="80%"
-                    paddingAngle={2}
-                    stroke="#fff"
-                    strokeWidth={2}
-                    label
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+      {/* Profile Visits */}
+      <div className="p-5 bg-white rounded-lg shadow-[0_2px_6px_rgba(0,0,0,0.08)] border border-solid border-[var(--border-color)]">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-[500] text-gray-700">
+            Profile Visits
+          </span>
+          <i className="fi fi-rr-eye text-blue-500 text-[24px]" />
         </div>
-      </section>
+        <h3 className="text-2xl font-bold text-gray-900 mt-2">102</h3>
+        <span className="text-sm text-[var(--text-color)] mt-1">
+          +23% this week
+        </span>
+      </div>
 
-      <div className="flex">
-        <div></div>
+      {/* New Leads */}
+      <div className="p-5 bg-white rounded-lg shadow-[0_2px_6px_rgba(0,0,0,0.08)] border border-solid border-[var(--border-color)]">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-[500] text-gray-700">New Leads</span>
+          <i className="fi fi-rr-chat-arrow-grow text-purple-500 text-[24px]" />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mt-2">18</h3>
+        <span className="text-sm text-[var(--text-color)] mt-1">
+          +1% this week
+        </span>
       </div>
     </div>
   );
 };
 
-export default DashboardComponents;
+export default DashboardStats;
