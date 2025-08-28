@@ -1,34 +1,81 @@
 "use client";
 import React from "react";
-import { FiCalendar } from "react-icons/fi";
 
 const FilterBar = () => {
   return (
-    <div className="mt-6 w-full rounded-lg   bg-white p-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3 border border-solid border-[var(--border-color)]">
+    <div className="mt-6 w-full rounded-lg bg-white p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4 border border-solid border-[var(--border-color)]">
       {/* User Select */}
-      <select className="w-full sm:w-1/3 rounded-lg border border-[var(--border-color)] py-[10px] px-[12px] bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900]">
-        <option>Select user</option>
+      <select
+        defaultValue="select"
+        className="w-full sm:w-1/3 rounded-lg border border-solid border-[var(--border-color)] py-[10px] px-[12px] bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
+      >
+        <option value="select" disabled>
+          Select user
+        </option>
+        <option value="abdul">Abdul Ahad</option>
+        <option value="saad">Saad Rafique</option>
+        <option value="saad">Saad Rafique</option>
+        <option value="saad">Saad Rafique</option>
+        <option value="saad">Saad Rafique</option>
+        <option value="saad">Saad Rafique</option>
+        <option value="saad">Saad Rafique</option>
       </select>
 
-      {/* Apply */}
-
       {/* Date Range */}
-      <div className="sm:w-1/3 w-full flex items-center gap-2 rounded-lg border border-[var(--border-color)] bg-white text-sm text-gray-700 px-[12px] py-[10px]">
+      <div className="sm:w-1/3 w-full flex items-center gap-2 rounded-lg border border-solid border-[var(--border-color)] bg-white text-sm px-[12px] py-[10px] h-10 focus-within:outline-none focus-within:ring-0">
         <input
           type="text"
           placeholder="Select your range"
-          className="flex-1 focus:outline-none"
+          className="flex-1 h-full focus:outline-none"
+          readOnly
         />
-        <FiCalendar className="text-gray-500" />
+        {/* Custom SVG icon */}
+        <svg
+          className="w-5 h-5 text-gray-500"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          fill="currentColor"
+        >
+          <path
+            d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 
+          32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 
+          85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 
+          32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 
+          48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 
+          80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 
+          16-16l0-32c0-8.8-7.2-16-16-16l-32 
+          0c-8.8 0-16 7.2-16 16zm128 
+          0l0 32c0 8.8 7.2 16 16 16l32 
+          0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 
+          0c-8.8 0-16 7.2-16 16zm144-16c-8.8 
+          0-16 7.2-16 16l0 32c0 8.8 7.2 16 
+          16 16l32 0c8.8 0 16-7.2 
+          16-16l0-32c0-8.8-7.2-16-16-16l-32 
+          0zM64 400l0 32c0 8.8 7.2 16 16 
+          16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 
+          0c-8.8 0-16 7.2-16 16zm144-16c-8.8 
+          0-16 7.2-16 16l0 32c0 8.8 7.2 16 
+          16 16l32 0c8.8 0 16-7.2 
+          16-16l0-32c0-8.8-7.2-16-16-16l-32 
+          0c-8.8 0-16 7.2-16 16zm112 
+          16l0 32c0 8.8 7.2 16 16 
+          16l32 0c8.8 0 16-7.2 
+          16-16l0-32c0-8.8-7.2-16-16-16l-32 
+          0c-8.8 0-16 7.2-16 16z"
+          />
+        </svg>
       </div>
 
-      <button className="rounded-md bg-[#FFD900] px-6 py-2 text-sm font-medium text-black hover:bg-[#ffe657] transition-colors">
-        Apply
-      </button>
-      {/* Reset */}
-      <button className="rounded-md border border-gray-300 px-6 py-2 text-sm font-medium text-gray-700 bg-white hover:bg-gray-100 transition-colors">
-        Reset
-      </button>
+      {/* Buttons Group - Right Aligned */}
+      <div className="flex justify-end gap-5 mx-[18px]">
+        <button className="w-[125px] rounded-md bg-[#FFD900] px-8 py-2 text-sm font-medium text-black hover:bg-[#ffe657] transition-colors">
+          Apply
+        </button>
+        <button className="w-[125px] rounded-md border border-solid border-[var(--border-color)] px-8 py-2 text-sm font-medium text-gray-700 bg-white transition-colors">
+          Reset
+        </button>
+      </div>
     </div>
   );
 };
