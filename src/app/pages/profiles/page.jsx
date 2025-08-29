@@ -159,29 +159,28 @@ const Profile = () => {
 
   return (
     <div className="pt-0 pb-3 text-custom">
-      {" "}
-      {/* ✅ Left padding removed */}
-      {/* Title */}
-      <h1 className="text-2xl text-[var(--tapwise-black)] font-bold mb-3">
-        Profiles
-      </h1>
-      {/* Search + Add Button */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative sm:w-64">
-          <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search profiles..."
-            className="w-full rounded-md border-custom pl-9 pr-3 py-2 text-[14px] leading-normal text-[#737373] placeholder:text-[#737373] focus:outline-none"
-          />
-        </div>
-
+      {/* Title + Add Button in one row */}
+      <div className="flex items-center justify-between mb-3">
+        <h1 className="text-2xl text-[var(--tapwise-black)] font-bold">
+          Profiles
+        </h1>
         <button className="rounded-md bg-[var(--bg-tapwise-yellow)] px-4 py-2 text-sm font-semibold text-black hover:bg-[var(--tapwise-yellow-hover)] flex items-center gap-1">
           <i className="fi fi-rr-plus" /> Add Profile
         </button>
       </div>
+
+      {/* Search Bar Below */}
+      <div className="relative sm:w-64 mb-4">
+        <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+        <input
+          type="text"
+          placeholder="Search profiles..."
+          className="w-full rounded-md border-custom pl-9 pr-3 py-2 text-[14px] leading-normal text-[#737373] placeholder:text-[#737373] focus:outline-none"
+        />
+      </div>
+
       {/* Counters */}
-      <div className="mt-3 flex justify-end gap-5">
+      <div className="flex justify-end gap-5 mb-3">
         <div className="flex items-center gap-1">
           <span className="h-4 w-4 rounded-full bg-[var(--bg-tapwise-yellow)]" />
           <span className="font-sans font-normal text-black text-base leading-normal">
@@ -197,8 +196,9 @@ const Profile = () => {
           <span className="text-gray-600 font-[16px]">Consumed</span>
         </div>
       </div>
+
       {/* Grid */}
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {profiles.map((p, i) => (
           <ProfileCard key={i} p={p} />
         ))}
