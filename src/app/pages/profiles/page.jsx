@@ -30,7 +30,7 @@ const profiles = [
     phone: "+358181234",
     status: "Active",
     qr: 2,
-    avatar: "images/11-packaging-logo.png",
+    avatar: "/images/image5.png",
   },
   {
     name: "Abdulah Alhokair",
@@ -86,7 +86,7 @@ const profiles = [
   },
 ];
 
-// Status badge
+// 🔹 Status Badge
 const StatusChip = ({ status }) => {
   const isActive = status === "Active";
   return (
@@ -105,29 +105,26 @@ const StatusChip = ({ status }) => {
   );
 };
 
-// QR code count badge
+// 🔹 QR Code Badge
 const QRBadge = ({ count = 0 }) => (
   <div className="flex items-center gap-1 text-gray-700">
-    <i className="fi fi-rr-qrcode text-[18px]" />
+    <img src="/images/qr.svg" alt="QR Code" className="w-5 h-5" />
     <span className="text-sm font-semibold">{count}</span>
   </div>
 );
 
-// Profile card
+// 🔹 Profile Card
 const ProfileCard = ({ p }) => (
-  <div
-    className="rounded-lg bg-white p-3 shadow-sm border-custom flex flex-col justify-between h-[220px] mt-3 
-               font-sans text-[16px] leading-normal text-black font-normal"
-  >
+  <div className="rounded-lg bg-white p-4 shadow-sm border-custom flex flex-col justify-between h-[240px] w-full text-custom">
     <div>
       <div className="flex items-start gap-3">
         <img
           src={p.avatar}
           alt={p.name}
-          className="h-10 w-10 rounded-full object-cover border-custom"
+          className="h-12 w-12 rounded-full object-cover border-custom"
         />
         <div className="flex-1 min-w-0">
-          <h3 className="truncate text-sm font-semibold text-gray-900">
+          <h3 className="truncate text-base font-semibold text-gray-900">
             {p.name}
           </h3>
           {p.role && <p className="text-xs text-gray-600">{p.role}</p>}
@@ -155,26 +152,27 @@ const ProfileCard = ({ p }) => (
   </div>
 );
 
-// Main profiles page
+// 🔹 Main Profiles Page
 const Profile = () => {
   const available = 28;
   const consumed = 13;
 
   return (
-    <div className="px-2 sm:px-3 lg:px-4 pt-0 pb-3">
+    <div className="pt-0 pb-3 text-custom">
+      {" "}
+      {/* ✅ Left padding removed */}
       {/* Title */}
-      <h1 className="text-xl font-bold text-gray-900 mb-2">Profiles</h1>
-
-      {/* Search + Add */}
+      <h1 className="text-2xl text-[var(--tapwise-black)] font-bold mb-3">
+        Profiles
+      </h1>
+      {/* Search + Add Button */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative sm:w-56">
+        <div className="relative sm:w-64">
           <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             placeholder="Search profiles..."
-            className="w-full rounded-md border-custom pl-9 pr-3 py-2 
-                       font-sans font-normal text-[13px] leading-normal text-[#737373] 
-                       placeholder:text-[#737373] focus:outline-none"
+            className="w-full rounded-md border-custom pl-9 pr-3 py-2 text-[14px] leading-normal text-[#737373] placeholder:text-[#737373] focus:outline-none"
           />
         </div>
 
@@ -182,23 +180,25 @@ const Profile = () => {
           <i className="fi fi-rr-plus" /> Add Profile
         </button>
       </div>
-
       {/* Counters */}
-      <div className="mt-2 flex justify-end gap-4">
-        <div className="flex items-center gap-1 text-gray-800">
+      <div className="mt-3 flex justify-end gap-5">
+        <div className="flex items-center gap-1">
           <span className="h-4 w-4 rounded-full bg-[var(--bg-tapwise-yellow)]" />
-          <span className="text-sm font-semibold">{available}</span>
-          <span className="text-gray-600">Available</span>
+          <span className="font-sans font-normal text-black text-base leading-normal">
+            {available}
+          </span>
+          <span className="text-gray-600 ">Available</span>
         </div>
-        <div className="flex items-center gap-1 text-gray-800">
+        <div className="flex items-center gap-1">
           <span className="h-4 w-4 rounded-full bg-green-500" />
-          <span className="text-sm font-semibold">{consumed}</span>
-          <span className="text-gray-600">Consumed</span>
+          <span className="font-sans font-normal text-black text-base leading-normal">
+            {consumed}
+          </span>
+          <span className="text-gray-600 font-[16px]">Consumed</span>
         </div>
       </div>
-
       {/* Grid */}
-      <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 justify-start items-start">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {profiles.map((p, i) => (
           <ProfileCard key={i} p={p} />
         ))}
