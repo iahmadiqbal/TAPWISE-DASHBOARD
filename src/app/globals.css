@@ -12,8 +12,10 @@
     --tapwise-border: #C2C2C2;
     --text-color: #22C55E;
     --text-tapwise-yellow: #FFD900;
-    --border-color: var(--tapwise-border); /* Single source of truth */
+    --border-color: var(--tapwise-border); 
     --secondary-white: #EDEDED;
+    --global-text-color: #737373;
+  
 
     /* Dashboard font */
     --default-font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -42,4 +44,8 @@
     line-height: normal;
     color: rgb(115, 115, 115);
   }
+
+  
 }
+
+

@@ -1,267 +1,210 @@
 "use client";
-import {
-  FiSearch,
-  FiPlus,
-  FiEdit,
-  FiEye,
-  FiTrash2,
-  FiMoreHorizontal,
-  FiActivity,
-} from "react-icons/fi";
-import { LuQrCode } from "react-icons/lu";
+import React from "react";
 
-const Profiles = () => {
-  // ------- Dummy data -------
-  const mockProfiles = [
-    {
-      id: "1",
-      name: "Sarah Johnson",
-      email: "sarah@techsolutions.com",
-      company: "Tech Solutions Inc.",
-      cardId: "NFC-001",
-      status: "active",
-      lastActivity: "2 hours ago",
-      scans: 145,
-    },
-    {
-      id: "2",
-      name: "Michael Chen",
-      email: "michael@creativeagency.com",
-      company: "Creative Agency",
-      cardId: "NFC-002",
-      status: "active",
-      lastActivity: "5 hours ago",
-      scans: 89,
-    },
-    {
-      id: "3",
-      name: "Emily Davis",
-      email: "emily@marketingpro.com",
-      company: "Marketing Pro",
-      cardId: "NFC-003",
-      status: "pending",
-      lastActivity: "1 day ago",
-      scans: 34,
-    },
-    {
-      id: "4",
-      name: "James Wilson",
-      email: "james@startup.com",
-      company: "Startup Hub",
-      cardId: "NFC-004",
-      status: "inactive",
-      lastActivity: "3 days ago",
-      scans: 267,
-    },
-  ];
+const profiles = [
+  {
+    name: "ALI ALAHMARI",
+    status: "Expired",
+    qr: 20,
+    avatar: "/images/profilepicture-1.png",
+  },
+  {
+    name: "Abdul Ahad",
+    role: "Web Developer",
+    email: "test123@gmail.com",
+    phone: "+92121234545",
+    status: "Active",
+    qr: 49,
+    avatar: "/images/profilepicture2.png",
+  },
+  { name: "Unnamed", status: "Active", qr: 0, avatar: "/images/unnamed.png" },
+  {
+    name: "Muhammad Ali 01",
+    phone: "+387123",
+    status: "Active",
+    qr: 6,
+    avatar: "/images/Ali.png",
+  },
+  {
+    name: "Muhammad Ali 0679",
+    phone: "+358181234",
+    status: "Active",
+    qr: 2,
+    avatar: "images/11-packaging-logo.png",
+  },
+  {
+    name: "Abdulah Alhokair",
+    phone: "+933455601448",
+    status: "Active",
+    qr: 5,
+    avatar: "/images/abdullah.png",
+  },
+  {
+    name: "test phon ext",
+    status: "Active",
+    qr: 1,
+    avatar: "/images/testphoneimage.png",
+  },
+  {
+    name: "Image Issue",
+    status: "Active",
+    qr: 0,
+    avatar: "/images/issueimage.png",
+  },
+  {
+    name: "test image",
+    status: "Active",
+    qr: 1,
+    avatar: "/images/testimage.png",
+  },
+  {
+    name: "Ahad Ali",
+    role: "Web developer",
+    email: "ahadalimeer@gmail.com",
+    status: "Active",
+    qr: 2,
+    avatar: "/images/ahadali.png",
+  },
+  { name: "Goods", status: "Active", qr: 0, avatar: "/images/good.png" },
+  {
+    name: "Saad Malik",
+    role: "CEO",
+    email: "saadmalikworld=1@gmail.com",
+    phone: "+9203440512256",
+    status: "Active",
+    qr: 12,
+    avatar: "/images/saadmalik.png",
+  },
+  {
+    name: "Saad Rafique",
+    role: "CEO",
+    email: "info@hikenseek.ae",
+    phone: "+9203335153038",
+    status: "Active",
+    qr: 18,
+    avatar: "/images/profilepicture13.png",
+  },
+];
 
-  // ------- Status Colors -------
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "active":
-        return "bg-green-100 text-green-800";
-      case "inactive":
-        return "bg-red-100 text-red-800";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
+// Status badge
+const StatusChip = ({ status }) => {
+  const isActive = status === "Active";
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+        isActive ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"
+      }`}
+    >
+      <span
+        className={`mr-1 h-2 w-2 rounded-full ${
+          isActive ? "bg-green-500" : "bg-red-500"
+        }`}
+      />
+      {status}
+    </span>
+  );
+};
 
-  const getInitials = (name = "") =>
-    name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase();
+// QR code count badge
+const QRBadge = ({ count = 0 }) => (
+  <div className="flex items-center gap-1 text-gray-700">
+    <i className="fi fi-rr-qrcode text-[18px]" />
+    <span className="text-sm font-semibold">{count}</span>
+  </div>
+);
+
+// Profile card
+const ProfileCard = ({ p }) => (
+  <div
+    className="rounded-lg bg-white p-3 shadow-sm border-custom flex flex-col justify-between h-[220px] mt-3 
+               font-sans text-[16px] leading-normal text-black font-normal"
+  >
+    <div>
+      <div className="flex items-start gap-3">
+        <img
+          src={p.avatar}
+          alt={p.name}
+          className="h-10 w-10 rounded-full object-cover border-custom"
+        />
+        <div className="flex-1 min-w-0">
+          <h3 className="truncate text-sm font-semibold text-gray-900">
+            {p.name}
+          </h3>
+          {p.role && <p className="text-xs text-gray-600">{p.role}</p>}
+        </div>
+      </div>
+      <div className="mt-2 space-y-0.5 text-xs text-gray-700">
+        {p.email && <p className="truncate">{p.email}</p>}
+        {p.phone && <p className="truncate">{p.phone}</p>}
+      </div>
+    </div>
+
+    <div className="mt-2 flex items-center justify-between">
+      <StatusChip status={p.status} />
+      <QRBadge count={p.qr} />
+    </div>
+
+    <div className="mt-3 flex items-center gap-2">
+      <button className="flex-1 rounded-md border-custom px-3 py-1.5 text-xs font-medium hover:bg-gray-50">
+        <i className="fi fi-rr-eye mr-1" /> View
+      </button>
+      <button className="flex-1 rounded-md border-custom px-3 py-1.5 text-xs font-medium hover:bg-gray-50">
+        <i className="fi fi-rr-edit mr-1" /> Edit
+      </button>
+    </div>
+  </div>
+);
+
+// Main profiles page
+const Profile = () => {
+  const available = 28;
+  const consumed = 13;
 
   return (
-    <div className="space-y-6 font-system">
-      {/* Header Actions */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center font-system">
-        <div className="relative">
-          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tapwise-gray h-4 w-4" />
+    <div className="px-2 sm:px-3 lg:px-4 pt-0 pb-3">
+      {/* Title */}
+      <h1 className="text-xl font-bold text-gray-900 mb-2">Profiles</h1>
+
+      {/* Search + Add */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative sm:w-56">
+          <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             placeholder="Search profiles..."
-            className="
-              h-9 w-64 pl-10 rounded-md border border-border bg-white
-              text-sm placeholder:text-tapwise-gray focus:outline-none
-              focus:ring-2 focus:ring-[var(--bg-tapwise-yellow)]
-              focus:border-[var(--bg-tapwise-yellow)]
-              transition-colors
-            "
+            className="w-full rounded-md border-custom pl-9 pr-3 py-2 
+                       font-sans font-normal text-[13px] leading-normal text-[#737373] 
+                       placeholder:text-[#737373] focus:outline-none"
           />
         </div>
 
-        {/* Add Profile */}
-        <button
-          className="
-            inline-flex items-center justify-center h-9 px-4 rounded-md
-            text-[color:var(--tapwise-black,#1E1E1E)]
-            bg-[var(--bg-tapwise-yellow)]
-            border border-border
-            hover:bg-[var(--tapwise-yellow-hover)]
-            hover:border-[var(--bg-tapwise-yellow)]
-            active:border-[var(--bg-tapwise-yellow)]
-            active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
-            transition-colors
-          "
-        >
-          <FiPlus className="h-4 w-4 mr-2" />
-          Add Profile
+        <button className="rounded-md bg-[var(--bg-tapwise-yellow)] px-4 py-2 text-sm font-semibold text-black hover:bg-[var(--tapwise-yellow-hover)] flex items-center gap-1">
+          <i className="fi fi-rr-plus" /> Add Profile
         </button>
       </div>
 
-      {/* Profiles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-system">
-        {mockProfiles.map((profile) => (
-          <div
-            key={profile.id}
-            className="rounded-lg bg-white shadow-soft border border-[var(--color-gray-200)] transition-shadow font-system"
-          >
-            {/* CardHeader */}
-            <div className="p-6 pb-3 font-system">
-              <div className="flex items-start justify-between font-system">
-                <div className="flex items-center space-x-3 font-system">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-tapwise-yellow)]">
-                    <span className="font-semibold text-tapwise-black">
-                      {getInitials(profile.name)}
-                    </span>
-                  </div>
-                  <div className="font-system">
-                    <h3 className="font-semibold text-tapwise-black">
-                      {profile.name}
-                    </h3>
-                    <p className="text-sm text-tapwise-gray">
-                      {profile.cardId}
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  className="
-                    h-8 w-8 rounded-md inline-flex items-center justify-center
-                    hover:bg-[var(--tapwise-yellow-hover)]
-                    hover:border hover:border-[var(--bg-tapwise-yellow)]
-                    transition-colors
-                  "
-                  aria-label="More"
-                >
-                  <FiMoreHorizontal className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* CardContent */}
-            <div className="p-6 pt-3 space-y-4 font-system">
-              <div>
-                <p className="text-sm text-tapwise-gray">{profile.email}</p>
-                <p className="text-sm text-tapwise-gray">{profile.company}</p>
-              </div>
-
-              <div className="flex items-center justify-between font-system">
-                <span
-                  className={`
-                    inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
-                    border border-transparent cursor-pointer transition-colors
-                    ${getStatusColor(profile.status)}
-                    hover:bg-[var(--bg-tapwise-yellow)] hover:text-tapwise-black
-                    active:border-[var(--bg-tapwise-yellow)]
-                  `}
-                >
-                  {profile.status}
-                </span>
-
-                <div className="flex items-center space-x-1 text-sm text-tapwise-gray">
-                  <LuQrCode className="h-4 w-4" />
-                  <span>{profile.scans} scans</span>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-1 text-xs text-tapwise-gray">
-                <FiActivity className="h-3 w-3" />
-                <span>Last activity: {profile.lastActivity}</span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-2 pt-2 font-system">
-                {[
-                  { label: "View", icon: FiEye },
-                  { label: "Edit", icon: FiEdit },
-                ].map(({ label, icon: Icon }) => (
-                  <button
-                    key={label}
-                    className="
-                        flex-1 inline-flex items-center justify-center h-8 px-3 rounded-md
-                        border text-sm transition-colors
-                        bg-white border-border text-tapwise-black
-                        hover:bg-[var(--tapwise-yellow-hover)]
-                        hover:border-[var(--bg-tapwise-yellow)]
-                        active:border-[var(--bg-tapwise-yellow)]
-                        active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
-                      "
-                  >
-                    <Icon className="h-4 w-4 mr-1" />
-                    {label}
-                  </button>
-                ))}
-
-                <button
-                  title="Delete"
-                  className="
-                    inline-flex items-center justify-center h-8 px-2 rounded-md
-                    border text-sm transition-colors
-                    bg-white border-border text-tapwise-black
-                    hover:bg-[var(--tapwise-yellow-hover)]
-                    hover:border-[var(--bg-tapwise-yellow)]
-                    active:border-[var(--bg-tapwise-yellow)]
-                    active:ring-2 active:ring-[var(--bg-tapwise-yellow)]
-                  "
-                >
-                  <FiTrash2 className="h-4 w-4 text-red-500" />
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Counters */}
+      <div className="mt-2 flex justify-end gap-4">
+        <div className="flex items-center gap-1 text-gray-800">
+          <span className="h-4 w-4 rounded-full bg-[var(--bg-tapwise-yellow)]" />
+          <span className="text-sm font-semibold">{available}</span>
+          <span className="text-gray-600">Available</span>
+        </div>
+        <div className="flex items-center gap-1 text-gray-800">
+          <span className="h-4 w-4 rounded-full bg-green-500" />
+          <span className="text-sm font-semibold">{consumed}</span>
+          <span className="text-gray-600">Consumed</span>
+        </div>
       </div>
 
-      {/* Summary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 font-system">
-        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
-          <div className="p-4 text-center font-system">
-            <div className="text-2xl font-bold text-[color:var(--bg-tapwise-yellow)]">
-              4
-            </div>
-            <div className="text-sm text-tapwise-gray">Total Profiles</div>
-          </div>
-        </div>
-
-        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
-          <div className="p-4 text-center font-system">
-            <div className="text-2xl font-bold text-green-600">2</div>
-            <div className="text-sm text-tapwise-gray">Active</div>
-          </div>
-        </div>
-
-        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
-          <div className="p-4 text-center font-system">
-            <div className="text-2xl font-bold text-yellow-600">1</div>
-            <div className="text-sm text-tapwise-gray">Pending</div>
-          </div>
-        </div>
-
-        <div className="border border-border rounded-lg bg-white shadow-soft font-system">
-          <div className="p-4 text-center font-system">
-            <div className="text-2xl font-bold text-tapwise-black">535</div>
-            <div className="text-sm text-tapwise-gray">Total Scans</div>
-          </div>
-        </div>
+      {/* Grid */}
+      <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 justify-start items-start">
+        {profiles.map((p, i) => (
+          <ProfileCard key={i} p={p} />
+        ))}
       </div>
     </div>
   );
 };
 
-export default Profiles;
+export default Profile;
