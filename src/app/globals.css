@@ -12,10 +12,8 @@
     --tapwise-border: #C2C2C2;
     --text-color: #22C55E;
     --text-tapwise-yellow: #FFD900;
-
-    /* aliases / extras */
-    --border-color: var(--tapwise-border); 
-    --secondary-white: #EDEDED;            
+    --border-color: var(--tapwise-border); /* Single source of truth */
+    --secondary-white: #EDEDED;
 
     /* Dashboard font */
     --default-font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -23,6 +21,15 @@
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
-  /* Apply font to whole body */
-  body { font-family: var(--default-font-family); }
+  /* Apply font globally */
+  body {
+    font-family: var(--default-font-family);
+  }
+}
+
+@layer utilities {
+  /* 🔥 Global reusable border utility */
+  .border-custom {
+    border: 1px solid var(--border-color);
+  }
 }
