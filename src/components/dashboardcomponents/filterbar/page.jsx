@@ -3,33 +3,31 @@ import React from "react";
 
 const FilterBar = () => {
   return (
-    <div className="mt-6 w-full rounded-lg bg-white p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4 border border-solid border-[var(--border-color)]">
+    <div className="mt-6 w-full rounded-lg bg-white p-6 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 border border-solid border-[var(--border-color)]">
       {/* User Select */}
       <select
         defaultValue="select"
-        className="w-full sm:w-1/3 rounded-lg border border-solid border-[var(--border-color)] py-[10px] px-[12px] bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
+        className="flex-1 min-w-0 rounded-lg border border-solid border-[var(--border-color)] py-2 px-3 bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
       >
         <option value="select" disabled>
           Select user
         </option>
         <option value="abdul">Abdul Ahad</option>
-        <option value="saad">Saad Rafique</option>
-        <option value="saad">Saad Rafique</option>
-        <option value="saad">Saad Rafique</option>
-        <option value="saad">Saad Rafique</option>
-        <option value="saad">Saad Rafique</option>
-        <option value="saad">Saad Rafique</option>
+        <option value="saad1">Saad Rafique</option>
+        <option value="saad2">Ahmad</option>
+        <option value="saad3">Ali</option>
+        <option value="saad4">Ahmer</option>
+        <option value="saad4">Saad</option>
       </select>
 
       {/* Date Range */}
-      <div className="sm:w-1/3 w-full flex items-center gap-2 rounded-lg border border-solid border-[var(--border-color)] bg-white text-sm px-[12px] py-[10px] h-10 focus-within:outline-none focus-within:ring-0">
+      <div className="flex-1 min-w-0 flex items-center gap-2 rounded-lg border border-solid border-[var(--border-color)] bg-white text-sm px-3 py-2 h-10 focus-within:outline-none focus-within:ring-0">
         <input
           type="text"
           placeholder="Select your range"
-          className="flex-1 h-full focus:outline-none"
+          className="flex-1 min-w-0 h-full focus:outline-none"
           readOnly
         />
-        {/* Custom SVG icon */}
         <svg
           className="w-5 h-5 text-gray-500"
           aria-hidden="true"
@@ -39,40 +37,22 @@ const FilterBar = () => {
         >
           <path
             d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 
-          32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 
-          85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 
-          32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 
-          48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 
-          80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 
-          16-16l0-32c0-8.8-7.2-16-16-16l-32 
-          0c-8.8 0-16 7.2-16 16zm128 
-          0l0 32c0 8.8 7.2 16 16 16l32 
-          0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 
-          0c-8.8 0-16 7.2-16 16zm144-16c-8.8 
-          0-16 7.2-16 16l0 32c0 8.8 7.2 16 
-          16 16l32 0c8.8 0 16-7.2 
-          16-16l0-32c0-8.8-7.2-16-16-16l-32 
-          0zM64 400l0 32c0 8.8 7.2 16 16 
-          16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 
-          0c-8.8 0-16 7.2-16 16zm144-16c-8.8 
-          0-16 7.2-16 16l0 32c0 8.8 7.2 16 
-          16 16l32 0c8.8 0 16-7.2 
-          16-16l0-32c0-8.8-7.2-16-16-16l-32 
-          0c-8.8 0-16 7.2-16 16zm112 
-          16l0 32c0 8.8 7.2 16 16 
-          16l32 0c8.8 0 16-7.2 
-          16-16l0-32c0-8.8-7.2-16-16-16l-32 
-          0c-8.8 0-16 7.2-16 16z"
+            32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 
+            48 48l0 48L0 160l0-48C0 85.5 21.5 64 
+            48 64l48 0 0-32c0-17.7 14.3-32 
+            32-32zM0 192l448 0 0 272c0 
+            26.5-21.5 48-48 48L48 512c-26.5 
+            0-48-21.5-48-48L0 192z"
           />
         </svg>
       </div>
 
-      {/* Buttons Group - Right Aligned */}
-      <div className="flex justify-end gap-5 mx-[18px]">
-        <button className="w-[125px] rounded-md bg-[#FFD900] px-8 py-2 text-sm font-medium text-black hover:bg-[#ffe657] transition-colors">
+      {/* Buttons */}
+      <div className="flex flex-wrap justify-end gap-3 w-full sm:w-auto">
+        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md bg-[#FFD900] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffe657] transition-colors">
           Apply
         </button>
-        <button className="w-[125px] rounded-md border border-solid border-[var(--border-color)] px-8 py-2 text-sm font-medium text-gray-700 bg-white transition-colors">
+        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md border border-solid border-[var(--border-color)] px-4 py-2 text-sm font-medium text-gray-700 bg-white transition-colors">
           Reset
         </button>
       </div>
