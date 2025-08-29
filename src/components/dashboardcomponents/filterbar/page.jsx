@@ -1,13 +1,12 @@
 "use client";
-import React from "react";
 
 const FilterBar = () => {
   return (
-    <div className="mt-6 w-full rounded-lg bg-white p-6 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 border border-solid border-[var(--border-color)]">
+    <div className="mt-6 w-full rounded-lg bg-white p-6 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 border-custom">
       {/* User Select */}
       <select
         defaultValue="select"
-        className="flex-1 min-w-0 rounded-lg border border-solid border-[var(--border-color)] py-2 px-3 bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
+        className="flex-1 min-w-0 rounded-lg border-custom py-2 px-3 bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
       >
         <option value="select" disabled>
           Select user
@@ -17,11 +16,11 @@ const FilterBar = () => {
         <option value="saad2">Ahmad</option>
         <option value="saad3">Ali</option>
         <option value="saad4">Ahmer</option>
-        <option value="saad4">Saad</option>
+        <option value="saad5">Saad</option>
       </select>
 
       {/* Date Range */}
-      <div className="flex-1 min-w-0 flex items-center gap-2 rounded-lg border border-solid border-[var(--border-color)] bg-white text-sm px-3 py-2 h-10 focus-within:outline-none focus-within:ring-0">
+      <div className="flex-1 min-w-0 flex items-center gap-2 rounded-lg border-custom bg-white text-sm px-3 py-2 h-10 focus-within:outline-none focus-within:ring-0">
         <input
           type="text"
           placeholder="Select your range"
@@ -52,7 +51,7 @@ const FilterBar = () => {
         <button className="flex-1 sm:flex-none min-w-[100px] rounded-md bg-[#FFD900] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffe657] transition-colors">
           Apply
         </button>
-        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md border border-solid border-[var(--border-color)] px-4 py-2 text-sm font-medium text-gray-700 bg-white transition-colors">
+        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md border-custom px-4 py-2 text-sm font-medium text-gray-700 bg-white transition-colors">
           Reset
         </button>
       </div>
