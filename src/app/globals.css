@@ -32,4 +32,14 @@
   .border-custom {
     border: 1px solid var(--border-color);
   }
+
+  /* 🔥 Global reusable text utility */
+  .text-custom {
+    font-family: var(--default-font-family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    color: rgb(115, 115, 115);
+  }
 }

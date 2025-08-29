@@ -56,9 +56,7 @@ const TopCharts = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-5">
         {/* LEFT: Bar Chart */}
         <div className="bg-white border-custom rounded-lg p-4 md:p-5 shadow-[0_2px_6px_rgba(0,0,0,0.06)] select-none">
-          <h4 className="text-lg font-semibold text-gray-800 mb-3">
-            Top 5 by Leads Users
-          </h4>
+          <h4 className="text-custom mb-3">Top 5 by Leads Users</h4>
           <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData}>
@@ -77,9 +75,7 @@ const TopCharts = () => {
 
         {/* RIGHT: Line Chart */}
         <div className="bg-white border-custom rounded-lg p-4 md:p-5 shadow-[0_2px_6px_rgba(0,0,0,0.06)] select-none">
-          <h4 className="text-lg font-semibold text-gray-800 mb-3">
-            Top 5 by Taps Users
-          </h4>
+          <h4 className="text-custom mb-3">Top 5 by Taps Users</h4>
           <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={lineData}>

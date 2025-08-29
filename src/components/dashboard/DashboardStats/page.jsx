@@ -53,8 +53,8 @@ function CustomTooltip({ payload, label, active }) {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white border-custom rounded-lg p-3 shadow-md">
-        <p className="font-medium text-gray-800">{`${label} : ${payload[0].value}`}</p>
-        <p className="text-sm text-gray-600">{getIntroOfPage(label)}</p>
+        <p className="text-custom">{`${label} : ${payload[0].value}`}</p>
+        <p className="text-custom">{getIntroOfPage(label)}</p>
       </div>
     );
   }
@@ -92,8 +92,8 @@ const RecentAlerts = () => {
   return (
     <div className="border-custom rounded-lg p-4 bg-white shadow-sm flex flex-col">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-800">Recent Alerts</h2>
-        <button className="text-sm font-bold text-gray-800">View All</button>
+        <h2 className="text-custom font-bold">Recent Alerts</h2>
+        <button className="text-custom font-bold">View All</button>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -110,9 +110,7 @@ const RecentAlerts = () => {
                 className="w-10 h-10 rounded-full object-cover"
               />
               <div>
-                <span className="text-sm font-medium text-gray-800">
-                  {alert.name}
-                </span>
+                <span className="text-custom font-medium">{alert.name}</span>
                 <span className="block text-xs text-gray-500">
                   {alert.date}
                 </span>
@@ -160,7 +158,7 @@ const RecentAlertsPanel = () => {
               className="h-6 w-10 object-contain rounded"
             />
           </button>
-          <h2 className="text-sm font-semibold text-gray-800">Leads</h2>
+          <h2 className="text-custom font-semibold">Leads</h2>
 
           <button
             onClick={() => setSelected("yellow")}
@@ -176,12 +174,10 @@ const RecentAlertsPanel = () => {
               className="h-6 w-10 object-contain rounded"
             />
           </button>
-          <h2 className="text-sm font-semibold text-gray-800">Top</h2>
+          <h2 className="text-custom font-semibold">Top</h2>
         </div>
 
-        <h2 className="text-lg font-semibold mb-2 text-gray-800">
-          Stats Last 6 Months
-        </h2>
+        <h2 className="text-custom font-semibold mb-2">Stats Last 6 Months</h2>
         <RenderBarChart color={chartColor} />
       </div>
 

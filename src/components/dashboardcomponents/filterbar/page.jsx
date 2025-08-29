@@ -6,7 +6,7 @@ const FilterBar = () => {
       {/* User Select */}
       <select
         defaultValue="select"
-        className="flex-1 min-w-0 rounded-lg border-custom py-2 px-3 bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
+        className="flex-1 min-w-0 rounded-lg border-custom py-2 px-3 bg-white text-custom focus:outline-none focus:ring-2 focus:ring-[#FFD900] h-10"
       >
         <option value="select" disabled>
           Select user
@@ -20,11 +20,11 @@ const FilterBar = () => {
       </select>
 
       {/* Date Range */}
-      <div className="flex-1 min-w-0 flex items-center gap-2 rounded-lg border-custom bg-white text-sm px-3 py-2 h-10 focus-within:outline-none focus-within:ring-0">
+      <div className="flex-1 min-w-0 flex items-center gap-2 rounded-lg border-custom bg-white text-custom px-3 py-2 h-10 focus-within:outline-none focus-within:ring-0">
         <input
           type="text"
           placeholder="Select your range"
-          className="flex-1 min-w-0 h-full focus:outline-none"
+          className="flex-1 min-w-0 h-full focus:outline-none text-custom"
           readOnly
         />
         <svg
@@ -48,10 +48,10 @@ const FilterBar = () => {
 
       {/* Buttons */}
       <div className="flex flex-wrap justify-end gap-3 w-full sm:w-auto">
-        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md bg-[#FFD900] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffe657] transition-colors">
+        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md bg-[#FFD900] px-4 py-2 text-custom font-medium text-black hover:bg-[#ffe657] transition-colors">
           Apply
         </button>
-        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md border-custom px-4 py-2 text-sm font-medium text-gray-700 bg-white transition-colors">
+        <button className="flex-1 sm:flex-none min-w-[100px] rounded-md border-custom px-4 py-2 text-custom font-medium text-gray-700 bg-white transition-colors">
           Reset
         </button>
       </div>
