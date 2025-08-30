@@ -86,17 +86,17 @@ const profiles = [
   },
 ];
 
-// 🔹 Status Badge
+// 🔹 Status Badge (uniform)
 const StatusChip = ({ status }) => {
   const isActive = status === "Active";
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium leading-none ${
         isActive ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"
       }`}
     >
       <span
-        className={`mr-1 h-2 w-2 rounded-full ${
+        className={`h-2 w-2 rounded-full ${
           isActive ? "bg-green-500" : "bg-red-500"
         }`}
       />
@@ -105,17 +105,18 @@ const StatusChip = ({ status }) => {
   );
 };
 
-// 🔹 QR Code Badge
+// 🔹 QR Code Badge (uniform)
 const QRBadge = ({ count = 0 }) => (
-  <div className="flex items-center gap-1 text-gray-700">
-    <img src="/images/qr.svg" alt="QR Code" className="w-5 h-5" />
-    <span className="text-sm font-semibold">{count}</span>
+  <div className="flex items-center gap-1 text-gray-700 text-xs leading-none">
+    <img src="/images/qr.svg" alt="QR Code" className="w-4 h-4" />
+    <span className="font-semibold">{count}</span>
   </div>
 );
 
-// 🔹 Profile Card
+// 🔹 Profile Card  with (normalized layout)
 const ProfileCard = ({ p }) => (
   <div className="rounded-lg bg-white p-4 shadow-sm border-custom flex flex-col justify-between h-[240px] w-full text-custom">
+    {/* Top: avatar + name/role */}
     <div>
       <div className="flex items-start gap-3">
         <img
@@ -124,28 +125,41 @@ const ProfileCard = ({ p }) => (
           className="h-12 w-12 rounded-full object-cover border-custom"
         />
         <div className="flex-1 min-w-0">
+          {/* Name (single-line) */}
           <h3 className="truncate text-base font-semibold text-gray-900">
             {p.name}
           </h3>
-          {p.role && <p className="text-xs text-gray-600">{p.role}</p>}
+
+          {/* Role line reserved height (keeps all cards equal even if role missing) */}
+          <div className="min-h-[16px]">
+            {p.role ? (
+              <p className="text-xs text-gray-600 truncate">{p.role}</p>
+            ) : (
+              <span className="invisible text-xs">placeholder</span>
+            )}
+          </div>
         </div>
       </div>
-      <div className="mt-2 space-y-0.5 text-xs text-gray-700">
+
+      {/* Email / Phone block with fixed min-height so spacing stays same */}
+      <div className="mt-2 text-xs text-gray-700 leading-5 min-h-[40px]">
         {p.email && <p className="truncate">{p.email}</p>}
         {p.phone && <p className="truncate">{p.phone}</p>}
       </div>
     </div>
 
-    <div className="mt-2 flex items-center justify-between">
+    {/* Middle: Status + QR (always one line) */}
+    <div className="mt-1 flex items-center justify-between">
       <StatusChip status={p.status} />
       <QRBadge count={p.qr} />
     </div>
 
+    {/* Bottom: Buttons (uniform height) */}
     <div className="mt-3 flex items-center gap-2">
-      <button className="flex-1 rounded-md border-custom px-3 py-1.5 text-xs font-medium hover:bg-gray-50">
+      <button className="flex-1 h-9 rounded-md border-custom px-3 text-xs font-medium hover:bg-gray-50 inline-flex items-center justify-center">
         <i className="fi fi-rr-eye mr-1" /> View
       </button>
-      <button className="flex-1 rounded-md border-custom px-3 py-1.5 text-xs font-medium hover:bg-gray-50">
+      <button className="flex-1 h-9 rounded-md border-custom px-3 text-xs font-medium hover:bg-gray-50 inline-flex items-center justify-center">
         <i className="fi fi-rr-edit mr-1" /> Edit
       </button>
     </div>
@@ -159,7 +173,7 @@ const Profile = () => {
 
   return (
     <div className="pt-0 pb-3 text-custom">
-      {/* Title + Add Button in one row */}
+      {/* Title + Add Button */}
       <div className="flex items-center justify-between mb-3">
         <h1 className="text-2xl text-[var(--tapwise-black)] font-bold">
           Profiles
@@ -169,31 +183,37 @@ const Profile = () => {
         </button>
       </div>
 
-      {/* Search Bar Below */}
-      <div className="relative sm:w-64 mb-4">
-        <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search profiles..."
-          className="w-full rounded-md border-custom pl-9 pr-3 py-2 text-[14px] leading-normal text-[#737373] placeholder:text-[#737373] focus:outline-none"
-        />
-      </div>
-
-      {/* Counters */}
-      <div className="flex justify-end gap-5 mb-3">
-        <div className="flex items-center gap-1">
-          <span className="h-4 w-4 rounded-full bg-[var(--bg-tapwise-yellow)]" />
-          <span className="font-sans font-normal text-black text-base leading-normal">
-            {available}
-          </span>
-          <span className="text-gray-600 ">Available</span>
+      {/* Search + Counters Row */}
+      <div className="mb-4 mt-3 flex flex-wrap items-center justify-between gap-3">
+        {/* Search Box (your requested font styles) */}
+        <div className="relative w-[160px] sm:w-[180px]">
+          <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search profiles..."
+            className="w-full rounded-[8px] border border-[var(--border-color)] pl-9 pr-3 py-2 focus:outline-none"
+            style={{
+              fontWeight: 400,
+              fontSize: "13px",
+              lineHeight: "normal",
+              color: "rgb(115, 115, 115)",
+              fontStyle: "normal",
+            }}
+          />
         </div>
-        <div className="flex items-center gap-1">
-          <span className="h-4 w-4 rounded-full bg-green-500" />
-          <span className="font-sans font-normal text-black text-base leading-normal">
-            {consumed}
-          </span>
-          <span className="text-gray-600 font-[16px]">Consumed</span>
+
+        {/* Counters */}
+        <div className="flex items-center gap-5">
+          <div className="flex items-center gap-1">
+            <span className="h-4 w-4 rounded-full bg-[var(--bg-tapwise-yellow)]" />
+            <span className="font-sans text-base">{available}</span>
+            <span className="text-gray-600">Available</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="h-4 w-4 rounded-full bg-green-500" />
+            <span className="font-sans text-base">{consumed}</span>
+            <span className="text-gray-600">Consumed</span>
+          </div>
         </div>
       </div>
 
