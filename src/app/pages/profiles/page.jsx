@@ -86,7 +86,7 @@ const profiles = [
   },
 ];
 
-// 🔹 Status Badge (uniform)
+// 🔹 Status Badge
 const StatusChip = ({ status }) => {
   const isActive = status === "Active";
   return (
@@ -105,18 +105,25 @@ const StatusChip = ({ status }) => {
   );
 };
 
-// 🔹 QR Code Badge (uniform)
+// 🔹 QR Code Badge (with bigger font)
 const QRBadge = ({ count = 0 }) => (
-  <div className="flex items-center gap-1 text-gray-700 text-xs leading-none">
+  <div className="flex items-center gap-1 text-xs leading-none">
     <img src="/images/qr.svg" alt="QR Code" className="w-4 h-4" />
-    <span className="font-semibold">{count}</span>
+    <span
+      className="font-semibold"
+      style={{
+        color: "#F9C900",
+        fontSize: "14px", // bigger font size
+      }}
+    >
+      {count}
+    </span>
   </div>
 );
 
-// 🔹 Profile Card (normalized layout)
+// 🔹 Profile Card
 const ProfileCard = ({ p }) => (
   <div className="rounded-lg bg-white p-4 shadow-sm border-custom flex flex-col justify-between h-[240px] w-full text-custom">
-    {/* Top: avatar + name/role */}
     <div>
       <div className="flex items-start gap-3">
         <img
@@ -125,12 +132,9 @@ const ProfileCard = ({ p }) => (
           className="h-12 w-12 rounded-full object-cover border-custom"
         />
         <div className="flex-1 min-w-0">
-          {/* Name (single-line) */}
           <h3 className="truncate text-base font-semibold text-gray-900">
             {p.name}
           </h3>
-
-          {/* Role line reserved height (keeps all cards equal even if role missing) */}
           <div className="min-h-[16px]">
             {p.role ? (
               <p className="text-xs text-gray-600 truncate">{p.role}</p>
@@ -141,20 +145,20 @@ const ProfileCard = ({ p }) => (
         </div>
       </div>
 
-      {/* Email / Phone block with fixed min-height so spacing stays same */}
+      {/* Email / Phone */}
       <div className="mt-2 text-xs text-gray-700 leading-5 min-h-[40px]">
         {p.email && <p className="truncate">{p.email}</p>}
         {p.phone && <p className="truncate">{p.phone}</p>}
       </div>
     </div>
 
-    {/* Middle: Status + QR (always one line) */}
+    {/* Status + QR */}
     <div className="mt-1 flex items-center justify-between">
       <StatusChip status={p.status} />
       <QRBadge count={p.qr} />
     </div>
 
-    {/* Bottom: Buttons (uniform height) */}
+    {/* Buttons */}
     <div className="mt-3 flex items-center gap-2">
       <button className="flex-1 h-9 rounded-md border-custom px-3 text-xs font-medium hover:bg-gray-50 inline-flex items-center justify-center">
         <i className="fi fi-rr-eye mr-1" /> View
@@ -166,7 +170,7 @@ const ProfileCard = ({ p }) => (
   </div>
 );
 
-// 🔹 Main Profiles Page (search box remains as you set)
+// 🔹 Main Profiles Page
 const Profile = () => {
   const available = 28;
   const consumed = 13;
@@ -183,9 +187,8 @@ const Profile = () => {
         </button>
       </div>
 
-      {/* Search + Counters Row */}
+      {/* Search + Counters */}
       <div className="mb-4 mt-3 flex flex-wrap items-center justify-between gap-3">
-        {/* Search Box (your requested font styles) */}
         <div className="relative w-[160px] sm:w-[180px]">
           <i className="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
@@ -201,8 +204,6 @@ const Profile = () => {
             }}
           />
         </div>
-
-        {/* Counters */}
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-1">
             <span className="h-4 w-4 rounded-full bg-[var(--bg-tapwise-yellow)]" />
