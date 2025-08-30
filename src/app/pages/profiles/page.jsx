@@ -113,7 +113,7 @@ const QRBadge = ({ count = 0 }) => (
   </div>
 );
 
-// 🔹 Profile Card  with (normalized layout)
+// 🔹 Profile Card (normalized layout)
 const ProfileCard = ({ p }) => (
   <div className="rounded-lg bg-white p-4 shadow-sm border-custom flex flex-col justify-between h-[240px] w-full text-custom">
     {/* Top: avatar + name/role */}
@@ -166,7 +166,7 @@ const ProfileCard = ({ p }) => (
   </div>
 );
 
-// 🔹 Main Profiles Page
+// 🔹 Main Profiles Page (search box remains as you set)
 const Profile = () => {
   const available = 28;
   const consumed = 13;
