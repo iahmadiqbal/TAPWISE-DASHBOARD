@@ -1,366 +1,331 @@
 "use client";
-import React, { useState } from "react";
-import {
-  FiSearch,
-  FiGrid,
-  FiList,
-  FiEdit,
-  FiTrash2,
-  FiUserCheck,
-  FiHeart,
-  FiPlus,
-} from "react-icons/fi";
+import React, { useMemo, useState, useEffect } from "react";
 
-const Leads = () => {
-  const mockLeads = [
-    {
-      id: "1",
-      name: "John Smith",
-      email: "john@techcorp.com",
-      businessName: "Tech Corp",
-      phoneNumber: "+1 234-567-8901",
-      status: "new",
-      dateAdded: "2024-01-15",
-    },
-    {
-      id: "2",
-      name: "Sarah Johnson",
-      email: "sarah@marketing.com",
-      businessName: "Marketing Pro",
-      phoneNumber: "+1 234-567-8902",
-      status: "interested",
-      dateAdded: "2024-01-14",
-    },
-    {
-      id: "3",
-      name: "Michael Chen",
-      email: "michael@design.com",
-      businessName: "Creative Studio",
-      phoneNumber: "+1 234-567-8903",
-      status: "pending",
-      dateAdded: "2024-01-13",
-    },
-    {
-      id: "4",
-      name: "Emily Davis",
-      email: "emily@startup.com",
-      businessName: "Startup Hub",
-      phoneNumber: "+1 234-567-8904",
-      status: "converted",
-      dateAdded: "2024-01-12",
-    },
-  ];
+const RAW_LEADS = [
+  {
+    name: "Ahad Ali",
+    phone: "09876543456",
+    email: "ahadali@gmail.com",
+    company: "Loopiq Studio",
+    datetime: "2025-08-06 18:09:34",
+    sharedWith: ["Abdul Ahad"],
+  },
+  {
+    name: "jawad",
+    phone: "03337283682",
+    email: "jawadrafique42@gmail.com",
+    company: "Hikenseek.digital",
+    datetime: "2025-08-06 18:09:51",
+    sharedWith: ["Abdul Ahad"],
+  },
+  {
+    name: "Muhamamd Ali",
+    phone: "03455601448",
+    email: "mali.cuwah@gmail.com",
+    company: "Loopiq",
+    datetime: "2025-08-25 15:02:10",
+    sharedWith: ["Saad Rafique"],
+  },
+  {
+    name: "Sohial",
+    phone: "0512529267",
+    email: "mahamjabbar2015@gmail.com",
+    company: "",
+    datetime: "2025-06-26 02:59:59",
+    sharedWith: ["Abdul Ahad"],
+  },
+  {
+    name: "Sohial",
+    phone: "0512529267",
+    email: "mahamjabbar2015@gmail.com",
+    company: "",
+    datetime: "2025-06-26 02:59:59",
+    sharedWith: ["Abdul Ahad"],
+  },
+  {
+    name: "Sohial",
+    phone: "0512529267",
+    email: "mahamjabbar2015@gmail.com",
+    company: "",
+    datetime: "2025-06-26 02:59:59",
+    sharedWith: ["Abdul Ahad"],
+  },
+];
 
-  const [leads, setLeads] = useState(mockLeads);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [viewMode, setViewMode] = useState("list");
-  const [filterStatus, setFilterStatus] = useState("all");
+export default function LeadsScreenshotLayout() {
+  // Default 5 so pagination visibly works with 6 rows
+  const [pageSize, setPageSize] = useState(5);
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [sortField, setSortField] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
 
-  const filteredLeads = leads.filter((lead) => {
-    const q = searchTerm.toLowerCase();
-    return (
-      (lead.name.toLowerCase().includes(q) ||
-        lead.email.toLowerCase().includes(q) ||
-        lead.businessName.toLowerCase().includes(q)) &&
-      (filterStatus === "all" || lead.status === filterStatus)
-    );
-  });
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "new":
-        return "bg-blue-100 text-blue-800 hover:bg-[var(--tapwise-yellow-hover)]";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 hover:bg-[var(--tapwise-yellow-hover)]";
-      case "interested":
-        return "bg-green-100 text-green-800 hover:bg-[var(--tapwise-yellow-hover)]";
-      case "converted":
-        return "bg-[var(--bg-tapwise-yellow)] text-tapwise-black hover:bg-[var(--tapwise-yellow-hover)]";
-      default:
-        return "bg-gray-100 text-gray-800 hover:bg-[var(--tapwise-yellow-hover)]";
+  const handleSort = (field) => {
+    if (sortField === field)
+      setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
+    else {
+      setSortField(field);
+      setSortOrder("asc");
     }
   };
 
-  const handleStatusChange = (id, status) =>
-    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
-  const handleDelete = (id) =>
-    setLeads((prev) => prev.filter((l) => l.id !== id));
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    let d = [...RAW_LEADS];
+    if (q) {
+      d = d.filter((r) =>
+        [
+          r.name,
+          r.phone,
+          r.email,
+          r.company,
+          r.datetime,
+          ...(r.sharedWith || []),
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(q)
+      );
+    }
+    if (sortField) {
+      d.sort((a, b) => {
+        const A = Array.isArray(a[sortField])
+          ? a[sortField].join(", ")
+          : a[sortField] || "";
+        const B = Array.isArray(b[sortField])
+          ? b[sortField].join(", ")
+          : b[sortField] || "";
+        return sortOrder === "asc"
+          ? String(A).localeCompare(String(B))
+          : String(B).localeCompare(String(A));
+      });
+    }
+    return d;
+  }, [query, sortField, sortOrder]);
 
-  return (
-    <div className="space-y-6 overflow-x-hidden">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-          <div className="relative w-full sm:w-64">
-            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tapwise-gray h-4 w-4" />
-            <input
-              type="text"
-              placeholder="Search leads..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="h-9 w-full pl-10 rounded-md border border-gray-200 bg-white text-sm placeholder:text-tapwise-gray focus:outline-none focus:border-[var(--tapwise-yellow-hover)] focus:ring-1 focus:ring-[var(--tapwise-yellow-hover)] transition-colors"
-            />
-          </div>
+  const total = filtered.length;
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(page, pageCount);
+  const startIdx = (currentPage - 1) * pageSize;
+  const endIdx = Math.min(startIdx + pageSize, total);
+  const rows = filtered.slice(startIdx, endIdx);
 
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="w-full sm:w-auto px-3 py-2 border border-gray-200 rounded-lg text-sm"
-          >
-            <option value="all">All Status</option>
-            <option value="new">New</option>
-            <option value="pending">Pending</option>
-            <option value="interested">Interested</option>
-            <option value="converted">Converted</option>
-          </select>
-        </div>
+  useEffect(() => setPage(1), [query, pageSize]);
+  useEffect(() => {
+    if (page > pageCount) setPage(pageCount);
+  }, [pageCount, page]);
 
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => setViewMode(viewMode === "list" ? "card" : "list")}
-            className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-gray-200"
-          >
-            {viewMode === "list" ? (
-              <FiGrid className="h-4 w-4" />
-            ) : (
-              <FiList className="h-4 w-4" />
-            )}
-          </button>
+  const SortIcon = ({ active, order }) => (
+    <span className="ml-2 inline-flex flex-col leading-none">
+      <svg
+        className={`w-4 h-4 ${
+          active && order === "asc" ? "text-gray-800" : "text-gray-300"
+        }`}
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path d="M10 5l5 5H5l5-5z" />
+      </svg>
+      <svg
+        className={`w-4 h-4 -mt-1 ${
+          active && order === "desc" ? "text-gray-800" : "text-gray-300"
+        }`}
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path d="M10 15l-5-5h10l-5 5z" />
+      </svg>
+    </span>
+  );
 
-          <button className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-[var(--bg-tapwise-yellow)] text-tapwise-black hover:bg-[var(--tapwise-yellow-hover)] transition-colors">
-            <FiPlus className="h-4 w-4 mr-2" />
-            Add Lead
-          </button>
-        </div>
-      </div>
+  const downloadCSV = () => {
+    const rowsCsv = [
+      [
+        "Name",
+        "Phone no.",
+        "Email Address",
+        "Company",
+        "Date & Time",
+        "Shared with",
+      ],
+      ...filtered.map((r) => [
+        r.name,
+        r.phone,
+        r.email,
+        r.company,
+        r.datetime,
+        (r.sharedWith || []).join(" | "),
+      ]),
+    ];
+    const csv = rowsCsv
+      .map((row) =>
+        row.map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")
+      )
+      .join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "leads.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
-      {/* Leads Display */}
-      {viewMode === "list" ? (
-        <div className="border border-gray-200 rounded-lg bg-white shadow-soft">
-          <div className="p-6 pb-3 border-b border-gray-200">
-            <h2 className="text-base font-semibold text-tapwise-black">
-              Leads ({filteredLeads.length})
-            </h2>
-          </div>
+  // helper to render numbered pages
+  const Pages = () => (
+    <div className="flex items-center gap-2">
+      <button
+        onClick={() => setPage((p) => Math.max(1, p - 1))}
+        disabled={currentPage === 1}
+        className="rounded-md border border-gray-300 px-3 py-1 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Previous
+      </button>
 
-          <div className="p-6 pt-0">
-            {/* Mobile Cards */}
-            <div className="space-y-3 sm:hidden">
-              {filteredLeads.map((lead) => (
-                <div
-                  key={lead.id}
-                  className="border border-gray-200 rounded-lg p-4 hover:bg-tapwise-gray-light"
-                >
-                  <div className="flex items-start justify-between gap-3 border-b border-gray-200 pb-2">
-                    <div className="min-w-0">
-                      <p className="font-medium text-tapwise-black">
-                        {lead.name}
-                      </p>
-                      <p className="text-sm text-tapwise-gray">{lead.email}</p>
-                      <p className="text-sm text-tapwise-gray">
-                        {lead.businessName}
-                      </p>
-                      <p className="text-sm text-tapwise-gray">
-                        {lead.phoneNumber}
-                      </p>
-                      <p className="text-xs text-tapwise-gray mt-1">
-                        Added: {lead.dateAdded}
-                      </p>
-                    </div>
-                    <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
-                        lead.status
-                      )}`}
-                    >
-                      {lead.status}
-                    </span>
-                  </div>
+      {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
+        <button
+          key={n}
+          onClick={() => setPage(n)}
+          className={`rounded-md border px-3 py-1 text-sm ${
+            n === currentPage
+              ? "border-gray-900 bg-gray-100"
+              : "border-gray-300 hover:bg-gray-50"
+          }`}
+          aria-current={n === currentPage ? "page" : undefined}
+        >
+          {n}
+        </button>
+      ))}
 
-                  {/* Buttons */}
-                  <div className="flex items-center gap-2 mt-3">
-                    <button className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center">
-                      <FiEdit className="h-4 w-4" />
-                    </button>
-                    <button
-                      className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center disabled:opacity-50"
-                      onClick={() => handleStatusChange(lead.id, "converted")}
-                      disabled={lead.status === "converted"}
-                    >
-                      <FiUserCheck className="h-4 w-4" />
-                    </button>
-                    <button
-                      className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center disabled:opacity-50"
-                      onClick={() => handleStatusChange(lead.id, "interested")}
-                      disabled={
-                        lead.status === "interested" ||
-                        lead.status === "converted"
-                      }
-                    >
-                      <FiHeart className="h-4 w-4" />
-                    </button>
-                    <button
-                      className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center"
-                      onClick={() => handleDelete(lead.id)}
-                    >
-                      <FiTrash2 className="h-4 w-4 text-red-500" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Table */}
-            <div className="hidden sm:block">
-              <table className="w-full table-fixed">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
-                      Name
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
-                      Email
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
-                      Business
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
-                      Phone
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
-                      Status
-                    </th>
-                    <th className="text-left py-3 px-4 font-medium text-tapwise-gray">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredLeads.map((lead) => (
-                    <tr
-                      key={lead.id}
-                      className="border-b border-gray-200 hover:bg-tapwise-gray-light align-top"
-                    >
-                      <td className="py-3 px-4 font-medium text-tapwise-black">
-                        {lead.name}
-                      </td>
-                      <td className="py-3 px-4 text-tapwise-gray">
-                        {lead.email}
-                      </td>
-                      <td className="py-3 px-4 text-tapwise-gray">
-                        {lead.businessName}
-                      </td>
-                      <td className="py-3 px-4 text-tapwise-gray">
-                        {lead.phoneNumber}
-                      </td>
-                      <td className="py-3 px-4">
-                        <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
-                            lead.status
-                          )}`}
-                        >
-                          {lead.status}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
-                          <button className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center">
-                            <FiEdit className="h-4 w-4" />
-                          </button>
-                          <button
-                            className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center disabled:opacity-50"
-                            onClick={() =>
-                              handleStatusChange(lead.id, "converted")
-                            }
-                            disabled={lead.status === "converted"}
-                          >
-                            <FiUserCheck className="h-4 w-4" />
-                          </button>
-                          <button
-                            className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center disabled:opacity-50"
-                            onClick={() =>
-                              handleStatusChange(lead.id, "interested")
-                            }
-                            disabled={
-                              lead.status === "interested" ||
-                              lead.status === "converted"
-                            }
-                          >
-                            <FiHeart className="h-4 w-4" />
-                          </button>
-                          <button
-                            className="h-8 w-8 rounded-md hover:bg-[var(--tapwise-yellow-hover)] flex items-center justify-center"
-                            onClick={() => handleDelete(lead.id)}
-                          >
-                            <FiTrash2 className="h-4 w-4 text-red-500" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredLeads.map((lead) => (
-            <div
-              key={lead.id}
-              className="border border-gray-200 rounded-lg bg-white shadow-soft hover:shadow-medium"
-            >
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-4 border-b border-gray-200 pb-2">
-                  <div>
-                    <h3 className="font-semibold text-tapwise-black">
-                      {lead.name}
-                    </h3>
-                    <p className="text-sm text-tapwise-gray">
-                      {lead.businessName}
-                    </p>
-                  </div>
-                  <span
-                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
-                      lead.status
-                    )}`}
-                  >
-                    {lead.status}
-                  </span>
-                </div>
-                <div className="space-y-2 mb-4">
-                  <p className="text-sm text-tapwise-gray">{lead.email}</p>
-                  <p className="text-sm text-tapwise-gray">
-                    {lead.phoneNumber}
-                  </p>
-                  <p className="text-xs text-tapwise-gray">
-                    Added: {lead.dateAdded}
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-gray-200 hover:bg-[var(--tapwise-yellow-hover)]">
-                    <FiEdit className="h-4 w-4" />
-                  </button>
-                  <button
-                    className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-gray-200 hover:bg-[var(--tapwise-yellow-hover)] disabled:opacity-50"
-                    onClick={() => handleStatusChange(lead.id, "converted")}
-                    disabled={lead.status === "converted"}
-                  >
-                    <FiUserCheck className="h-4 w-4" />
-                  </button>
-                  <button
-                    className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-gray-200 hover:bg-[var(--tapwise-yellow-hover)]"
-                    onClick={() => handleDelete(lead.id)}
-                  >
-                    <FiTrash2 className="h-4 w-4 text-red-500" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <button
+        onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+        disabled={currentPage === pageCount || total === 0}
+        className="rounded-md border border-gray-300 px-3 py-1 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button>
     </div>
   );
-};
 
-export default Leads;
+  return (
+    <div className="w-full">
+      <h1 className="mb-4 text-2xl font-semibold">Leads</h1>
+
+      {/* OUTER BOX */}
+      <div className="rounded-xl border border-gray-300 bg-white p-4 sm:p-5">
+        {/* TOOLBAR */}
+        <div className="mb-5 rounded-xl border border-gray-300 p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <label className="flex items-center gap-2">
+              <span className="text-sm text-gray-800">Show</span>
+              <select
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}
+                className="h-9 rounded-md border border-gray-300 bg-white px-2 text-sm outline-none focus:border-gray-400"
+              >
+                {[5, 10, 25, 50, 100].map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+              <span className="text-sm text-gray-800">entries</span>
+            </label>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+              <button
+                onClick={downloadCSV}
+                className="h-10 rounded-lg bg-[var(--bg-tapwise-yellow,#FFD900)] px-4 text-sm font-medium text-black hover:bg-[var(--tapwise-yellow-hover,#ffe657)]"
+              >
+                Download CSV
+              </button>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search leads..."
+                className="h-10 w-72 rounded-lg border border-gray-300 px-3 text-sm outline-none placeholder:text-gray-400 focus:border-gray-400"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* TABLE */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-left text-sm">
+            <thead
+              className="text-gray-800"
+              style={{ borderBottom: "1px solid #111" }}
+            >
+              <tr className="[&>th]:px-6 [&>th]:py-4 [&>th]:cursor-pointer">
+                {[
+                  "name",
+                  "phone",
+                  "email",
+                  "company",
+                  "datetime",
+                  "sharedWith",
+                ].map((col, i) => {
+                  const labels = [
+                    "Name",
+                    "Phone no.",
+                    "Email Address",
+                    "Company",
+                    "Date & Time",
+                    "Shared with",
+                  ];
+                  return (
+                    <th
+                      key={col}
+                      onClick={() => handleSort(col)}
+                      className="font-semibold"
+                    >
+                      <div className="flex items-center">
+                        {labels[i]}
+                        <SortIcon
+                          active={sortField === col}
+                          order={sortOrder}
+                        />
+                      </div>
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, idx) => (
+                <tr
+                  key={idx}
+                  style={{ borderBottom: "1px solid #111" }}
+                  className="[&>td]:px-6 [&>td]:py-6"
+                >
+                  <td>{r.name}</td>
+                  <td>{r.phone}</td>
+                  <td>{r.email}</td>
+                  <td>{r.company}</td>
+                  <td>{r.datetime}</td>
+                  <td>
+                    <div className="flex flex-col">
+                      {(r.sharedWith || []).map((s, i) => (
+                        <span key={i}>{s}</span>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* FOOTER */}
+        <div className="mt-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+          <p className="text-sm text-gray-700">
+            {total === 0
+              ? "Showing 0 to 0 of 0 entries"
+              : `Showing ${startIdx + 1} to ${endIdx} of ${total} entries`}
+          </p>
+          <Pages />
+        </div>
+      </div>
+    </div>
+  );
+}
