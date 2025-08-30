@@ -353,13 +353,12 @@ export default function ThemeRightExact() {
               <p className="px-1 text-[14px] font-semibold">Web App</p>
               <StoreRow Icon={GlobeIcon} label="Web App" />
             </div>
-          </div>
-
-          {/* Tapwise note */}
-          <div className="rounded-xl border border-[#E5E7EB] bg-[#FFFBE9] px-6 py-8 text-center">
-            <p className="text-[#6B7280] text-sm">
-              Tapwise never sell or shares data
-            </p>
+            {/* Tapwise note */}
+            <div className="rounded-xl border border-[#E5E7EB] bg-[#FFFBE9] px-6 py-8 text-center">
+              <p className="text-[#6B7280] text-sm">
+                Tapwise never sell or shares data
+              </p>
+            </div>
           </div>
         </aside>
       </div>
