@@ -1,19 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaTiktok,
-  FaLinkedinIn,
-  FaBehance,
-  FaDribbble,
-  FaRedditAlien,
-  FaWhatsapp,
-  FaSnapchatGhost,
-} from "react-icons/fa";
+import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { LuScanLine } from "react-icons/lu";
 
-/* ===== tiny icons ===== */
+/* ===== tiny icons kept ===== */
 const Pencil = ({ className = "h-4 w-4" }) => (
   <svg viewBox="0 0 24 24" fill="none" className={className}>
     <path
@@ -24,7 +14,6 @@ const Pencil = ({ className = "h-4 w-4" }) => (
     <path d="m14.75 5.06 3.75 3.75" stroke="#FFD900" strokeWidth="1.6" />
   </svg>
 );
-
 const ChevronRight = (p) => (
   <svg viewBox="0 0 24 24" width="18" height="18" {...p}>
     <path
@@ -37,7 +26,6 @@ const ChevronRight = (p) => (
     />
   </svg>
 );
-
 const PlayIcon = (p) => (
   <svg viewBox="0 0 24 24" width="20" height="20" {...p}>
     <circle
@@ -51,7 +39,6 @@ const PlayIcon = (p) => (
     <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
   </svg>
 );
-
 const AppleIcon = (p) => (
   <svg viewBox="0 0 24 24" width="20" height="20" {...p}>
     <path
@@ -64,7 +51,6 @@ const AppleIcon = (p) => (
     />
   </svg>
 );
-
 const GlobeIcon = (p) => (
   <svg viewBox="0 0 24 24" width="20" height="20" {...p}>
     <circle
@@ -84,7 +70,7 @@ const GlobeIcon = (p) => (
   </svg>
 );
 
-/* ===== small atoms ===== */
+/* ===== tiny atoms ===== */
 const Swatch = ({ color, onClick }) => (
   <button
     type="button"
@@ -101,7 +87,6 @@ const Swatch = ({ color, onClick }) => (
     )}
   </button>
 );
-
 const StoreRow = ({ Icon, label }) => (
   <button className="mt-2 w-full flex items-center justify-between px-2 py-2.5">
     <div className="flex items-center gap-3">
@@ -112,30 +97,14 @@ const StoreRow = ({ Icon, label }) => (
   </button>
 );
 
-/* ===== Social Icons Array ===== */
-const socialIcons = [
-  { name: "Facebook", icon: <FaFacebookF className="w-5 h-5" /> },
-  { name: "Instagram", icon: <FaInstagram className="w-5 h-5" /> },
-  { name: "Twitter", icon: <FaTwitter className="w-5 h-5" /> },
-  { name: "TikTok", icon: <FaTiktok className="w-5 h-5" /> },
-  { name: "LinkedIn", icon: <FaLinkedinIn className="w-5 h-5" /> },
-  { name: "Behance", icon: <FaBehance className="w-5 h-5" /> },
-  { name: "Dribbble", icon: <FaDribbble className="w-5 h-5" /> },
-  { name: "Reddit", icon: <FaRedditAlien className="w-5 h-5" /> },
-  { name: "WhatsApp", icon: <FaWhatsapp className="w-5 h-5" /> },
-  { name: "Snapchat", icon: <FaSnapchatGhost className="w-5 h-5" /> },
-];
-
 /* ===== main component ===== */
 export default function ThemeRightExact() {
   const coverRef = useRef(null);
   const [coverPreview, setCoverPreview] = useState(null);
   const [coverError, setCoverError] = useState("");
-
   const logoRef = useRef(null);
   const [logoPreview, setLogoPreview] = useState(null);
   const [logoError, setLogoError] = useState("");
-
   const pickA = useRef(null),
     pickB = useRef(null),
     pickC = useRef(null),
@@ -159,7 +128,7 @@ export default function ThemeRightExact() {
       </div>
 
       <div className="mx-auto max-w-[1150px] px-4 pb-10 grid grid-cols-12 gap-4">
-        {/* LEFT COLUMN */}
+        {/* LEFT COLUMN (unchanged) */}
         <div className="col-span-12 md:col-span-8 space-y-4">
           {/* Cover Image */}
           <section className="rounded-xl border border-[#E5E7EB] bg-white shadow-sm p-4">
@@ -319,45 +288,83 @@ export default function ThemeRightExact() {
           </section>
         </div>
 
-        {/* RIGHT COLUMN */}
-        <aside className="col-span-12 md:col-span-4 space-y-3">
-          {/* Yellow bg group */}
-          <div className="bg-[#FFFBE9] p-3 space-y-3">
-            {/* Social Networks */}
-            <div className="rounded-xl border border-[#E5E7EB] bg-white p-3">
-              <h3 className="text-[14px] font-semibold mb-2">
-                Social Networks
-              </h3>
-              <div className="grid grid-cols-5 gap-2">
-                {socialIcons.map((s, i) => (
-                  <button
-                    key={i}
-                    title={s.name}
-                    className="h-10 w-10 rounded-xl border-2 border-black/70 grid place-items-center bg-white hover:bg-black/5"
-                  >
-                    {s.icon}
-                  </button>
-                ))}
+        {/* RIGHT COLUMN — EXACT screenshot layout */}
+        <aside className="col-span-12 md:col-span-4">
+          <div className="bg-[#FFFBE9] rounded-md overflow-hidden">
+            {/* taller black cover for exact look */}
+            <div className="w-full bg-black h-[200px]" />
+
+            <div className="relative px-4 pb-8">
+              {/* CARD */}
+              <div className="mx-auto w-full max-w-[430px] rounded-[26px] bg-white border border-black/10 shadow-[0_16px_40px_rgba(0,0,0,0.16)] px-6 pt-20 pb-7">
+                <div className="text-center">
+                  <h4 className="text-[32px] leading-[34px] font-semibold">
+                    Full Name
+                  </h4>
+                  <p className="text-[20px] leading-[24px] text-[#6B7280] mt-2">
+                    Position
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  {/* email */}
+                  <div className="flex items-center justify-between py-3">
+                    <div className="flex items-center gap-3">
+                      <span className="h-9 w-9 grid place-items-center rounded-full border border-black/20">
+                        <FiMail className="h-5 w-5" />
+                      </span>
+                      <span className="text-[18px]">yours@gmail.com</span>
+                    </div>
+                    <ChevronRight />
+                  </div>
+                  <div className="border-b border-black/10" />
+
+                  {/* phone */}
+                  <div className="flex items-center justify-between py-3">
+                    <div className="flex items-center gap-3">
+                      <span className="h-9 w-9 grid place-items-center rounded-full border border-black/20">
+                        <FiPhone className="h-5 w-5" />
+                      </span>
+                      <span className="text-[18px]">+92 1111111111</span>
+                    </div>
+                    <ChevronRight />
+                  </div>
+                  <div className="border-b border-black/10" />
+
+                  {/* location */}
+                  <div className="flex items-center justify-between py-3">
+                    <div className="flex items-center gap-3">
+                      <span className="h-9 w-9 grid place-items-center rounded-full border border-black/20">
+                        <FiMapPin className="h-5 w-5" />
+                      </span>
+                      <span className="text-[18px]">Islamabad, Pakistan</span>
+                    </div>
+                    <ChevronRight />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Stores */}
-            <div className="rounded-xl bg-white shadow-sm p-3">
-              <p className="px-1 text-[14px] font-semibold">Play Store</p>
-              <StoreRow Icon={PlayIcon} label="Play Store" />
-              <p className="px-1 mt-2 text-[14px] font-semibold">App Store</p>
-              <StoreRow Icon={AppleIcon} label="App Store" />
-            </div>
-
-            <div className="rounded-xl bg-white shadow-sm p-3">
-              <p className="px-1 text-[14px] font-semibold">Web App</p>
-              <StoreRow Icon={GlobeIcon} label="Web App" />
-            </div>
-            {/* Tapwise note */}
-            <div className=" bg-[#FFFBE9] px-6 py-8 text-center">
-              <p className="text-[#6B7280] text-sm">
-                Tapwise never sell or shares data
-              </p>
+              {/* AVATAR + BADGE (perfectly overlapping) */}
+              <div className="absolute left-1/2 -top-[65px] -translate-x-1/2">
+                <div className="relative">
+                  {/* outer ring + glow */}
+                  <div className="h-[132px] w-[132px] rounded-full bg-[#FFFAE9] ring-[10px] ring-[#E7E8EB] shadow-[0_8px_22px_rgba(0,0,0,0.28)] grid place-items-center">
+                    <div className="h-[110px] w-[110px] rounded-full bg-[#FFFAE9] grid place-items-center">
+                      <svg viewBox="0 0 48 48" className="h-[72px] w-[72px]">
+                        <circle cx="24" cy="16" r="8" fill="#FDBA4D" />
+                        <path
+                          d="M10 40c2-8 10-12 14-12s12 4 14 12"
+                          fill="#FDBA4D"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  {/* floating yellow scan badge with white outline */}
+                  <span className="absolute -right-2 bottom-2 h-10 w-10 rounded-full bg-[var(--bg-tapwise-yellow,#FFD900)] ring-4 ring-white grid place-items-center shadow-md">
+                    <LuScanLine className="h-5 w-5" />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </aside>
